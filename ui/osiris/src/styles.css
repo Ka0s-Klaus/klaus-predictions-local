@@ -1,0 +1,422 @@
+/* Osiris — tema oscuro.
+ *
+ * Los colores salen del palette de referencia de la guía de visualización, sin
+ * modificar: superficie #1a1a19, plano de página #0d0d0d, y la ranura 1 de la
+ * paleta categórica (#3987e5) como único tono de datos.
+ *
+ * Una sola serie lleva un solo color. Pintar cada barra de un tono distinto
+ * según su valor duplicaría en color lo que la longitud ya dice, y quemaría el
+ * único canal libre que queda.
+ */
+
+:root {
+  color-scheme: dark;
+
+  --plane: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-raised: #222221;
+
+  --ink: #ffffff;
+  --ink-secondary: #c3c2b7;
+  --ink-muted: #898781;
+
+  --grid: #2c2c2a;
+  --baseline: #383835;
+  --border: rgba(255, 255, 255, 0.1);
+
+  --series-1: #3987e5;
+
+  /* Estado. Nunca se usan para identificar una serie. */
+  --good: #0ca30c;
+  --warning: #fab219;
+  --critical: #d03b3b;
+
+  --radius: 10px;
+  --gap: 16px;
+
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--plane);
+  color: var(--ink);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* --- Estructura ---------------------------------------------------- */
+
+.app {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.masthead .tagline {
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .grid.split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.panel h2 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+
+.panel .hint {
+  margin: 0 0 16px;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+.empty {
+  padding: 28px 0;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+/* --- Stat tiles ----------------------------------------------------- */
+/* Cuando la historia es un número, el número es el gráfico. */
+
+.tiles {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-bottom: var(--gap);
+}
+
+.tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.tile .label {
+  font-size: 12px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tile .value {
+  margin-top: 6px;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.tile .sub {
+  font-size: 12px;
+  color: var(--ink-secondary);
+}
+
+/* --- Barras de confianza -------------------------------------------- */
+
+.bars {
+  display: grid;
+  gap: 10px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 118px 1fr 46px;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar-row .name {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar-track {
+  position: relative;
+  height: 10px;
+  background: var(--grid);
+  border-radius: 2px;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--series-1);
+  /* Extremo del dato redondeado, anclado a la línea base. */
+  border-radius: 2px 4px 4px 2px;
+  min-width: 2px;
+  transition: width 220ms ease-out;
+}
+
+.bar-row .value {
+  font-size: 13px;
+  color: var(--ink);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Umbral de consenso: referencia, no un dato. Va en gris recesivo. */
+.bar-threshold {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--baseline);
+}
+
+/* --- Lista de feeds -------------------------------------------------- */
+
+.feeds {
+  display: grid;
+  gap: 2px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.feed {
+  display: grid;
+  grid-template-columns: 64px 1fr 52px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px;
+  border-radius: 6px;
+}
+
+.feed:hover {
+  background: var(--surface-raised);
+}
+
+.feed .source {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+
+.feed .title {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feed .title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.feed .title a:hover {
+  text-decoration: underline;
+}
+
+/* Medidor de relevancia: la anchura codifica la magnitud, el color es
+ * constante. Colorear también por valor sería redundante. */
+.meter {
+  height: 6px;
+  background: var(--grid);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.meter > i {
+  display: block;
+  height: 100%;
+  background: var(--series-1);
+  border-radius: 2px;
+}
+
+/* --- Globo ----------------------------------------------------------- */
+
+.globe {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 460px;
+}
+
+.globe canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+}
+
+.globe-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 9px;
+  font-size: 12px;
+  max-width: 260px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.globe-tooltip .src {
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+/* --- Formulario de predicción ---------------------------------------- */
+
+.ask {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.ask input,
+.ask select {
+  background: var(--plane);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 11px;
+  color: var(--ink);
+  font: inherit;
+}
+
+.ask input:focus,
+.ask select:focus {
+  outline: 2px solid var(--series-1);
+  outline-offset: 1px;
+}
+
+.ask .row {
+  display: flex;
+  gap: 10px;
+}
+
+.ask button {
+  background: var(--series-1);
+  border: none;
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ask button:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.notice {
+  border-left: 3px solid var(--warning);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--ink-secondary);
+  background: var(--surface-raised);
+  border-radius: 0 6px 6px 0;
+}
+
+.notice.error {
+  border-left-color: var(--critical);
+}
+
+.verdict {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+
+.verdict p {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+/* --- Tabla alternativa ------------------------------------------------ */
+/* La identidad nunca puede depender solo del color: siempre hay una vista
+ * en tabla de los mismos datos. */
+
+.toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 11px;
+  color: var(--ink-secondary);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--grid);
+}
+
+th {
+  color: var(--ink-muted);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}

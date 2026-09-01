@@ -87,6 +87,8 @@ class MiroFishSwarm:
                 logger.warning("Respuesta del enjambre inválida (intento %d): %s", attempt, exc)
                 continue
 
+            self._clean_sources(response, events)
+
             return weighted_consensus(
                 response.verdicts,
                 self.agents,
@@ -124,6 +126,26 @@ class MiroFishSwarm:
                 synthesis=response.synthesis,
             )
         return response
+
+    @staticmethod
+    def _clean_sources(response: SwarmResponse, events: Sequence[dict[str, Any]]) -> None:
+        """Deja sólo fuentes que estaban de verdad en el contexto.
+
+        El prompt ya lo pide, pero un modelo pequeño no obedece: en una prueba
+        real devolvió `sources_used: ["…"]`, copiando literalmente el marcador
+        de posición del esquema de ejemplo. Citar una fuente inexistente es
+        peor que no citar ninguna, así que se filtra en código.
+        """
+        conocidas = {str(event.get("source")) for event in events if event.get("source")}
+
+        for verdict in response.verdicts.values():
+            limpias = [
+                fuente
+                for fuente in verdict.sources_used
+                # Los marcadores del esquema y los residuos de puntuación fuera.
+                if fuente.strip(" .…-") and (not conocidas or fuente in conocidas)
+            ]
+            verdict.sources_used = limpias
 
     def record_outcome(self, agent_votes: dict[str, float], actual: float) -> dict[str, float]:
         """Propaga un desenlace a los agentes que votaron. Devuelve el Brier de cada uno."""

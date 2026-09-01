@@ -136,6 +136,9 @@ class Settings(BaseSettings):
     # levantar un PostgreSQL. En producción se apunta a postgresql://…
     database_url: str = Field("sqlite:///./pythia.db", alias="DATABASE_URL")
     secret_key: str = Field("dev-only-change-me", alias="SECRET_KEY")
+    # Vacío = API abierta, que es lo razonable en localhost. Al definirlo, todo
+    # salvo /health exige `Authorization: Bearer <token>`.
+    api_token: str = Field("", alias="API_TOKEN")
     audit_enabled: bool = Field(True, alias="AUDIT_ENABLED")
     audit_sample_rate: float = Field(0.7, alias="AUDIT_SAMPLE_RATE", ge=0.0, le=1.0)
     debug: bool = Field(False, alias="DEBUG")
