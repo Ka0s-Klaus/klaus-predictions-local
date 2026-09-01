@@ -115,10 +115,9 @@ sources:
   - key: open_meteo
     name: Open-Meteo
     domain: weather
-    status: planned
+    status: implemented
     homepage: https://open-meteo.com/
     description: Previsión y anomalías meteorológicas sin clave.
-    notes: Endpoint verificado y sin clave. Es la siguiente más fácil de añadir.
 
   - key: enso_index
     name: ENSO
@@ -326,10 +325,9 @@ sources:
   - key: cisa_kev
     name: CISA-KEV
     domain: cyber
-    status: planned
+    status: implemented
     homepage: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
     description: Vulnerabilidades con explotación confirmada en la práctica.
-    notes: JSON sin clave y de formato estable. Candidata clara para la siguiente tanda.
 
   - key: nvd_cve
     name: NVD
@@ -380,10 +378,9 @@ sources:
   - key: reliefweb
     name: ReliefWeb
     domain: humanitarian
-    status: planned
+    status: implemented
     homepage: https://apidoc.reliefweb.int/
     description: Informes de situación de crisis humanitarias.
-    notes: API sin clave, bien documentada. Otra candidata fácil.
 
   - key: cdc_wastewater
     name: CDC-Wastewater
