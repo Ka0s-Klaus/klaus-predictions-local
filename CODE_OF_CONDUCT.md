@@ -106,4 +106,4 @@ dentro de la comunidad del proyecto.
 Este Código de Conducta es una adaptación del
 [Contributor Covenant](https://www.contributor-covenant.org/), versión 2.1,
 disponible en
-https://www.contributor-covenant.org/es/version/2/1/code_of_conduct.html
+[www.contributor-covenant.org](https://www.contributor-covenant.org/es/version/2/1/code_of_conduct.html).

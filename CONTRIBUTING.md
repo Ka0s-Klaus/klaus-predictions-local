@@ -46,7 +46,7 @@ con al menos una aprobación y el CI en verde.
 
 El historial y el changelog dependen de esto. Formato:
 
-```
+```text
 <tipo>(<ámbito opcional>): <descripción en imperativo>
 ```
 
