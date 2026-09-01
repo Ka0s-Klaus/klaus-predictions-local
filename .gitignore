@@ -1,0 +1,75 @@
+# --- Secretos y entorno ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.yaml
+
+# --- Datos y modelos locales ---
+data/
+datasets/
+models/
+*.ckpt
+*.safetensors
+*.gguf
+*.onnx
+*.pkl
+*.joblib
+*.h5
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.Python
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.next/
+.nuxt/
+.turbo/
+*.tsbuildinfo
+
+# --- Go ---
+bin/
+vendor/
+*.test
+*.out
+
+# --- Rust ---
+target/
+Cargo.lock
+
+# --- IDEs y SO ---
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Logs y temporales ---
+logs/
+*.log
+tmp/
+.cache/

@@ -1,0 +1,62 @@
+name: 💡 Proponer una funcionalidad
+description: Sugiere una mejora o capacidad nueva
+title: "feat: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Antes de abrir esto, considera empezar una
+        [Discussion](https://github.com/Ka0s-Klaus/klaus-predictions-local/discussions)
+        si la idea aún está poco definida.
+
+  - type: checkboxes
+    id: previos
+    attributes:
+      label: Comprobaciones previas
+      options:
+        - label: He buscado en los issues y discussions existentes.
+          required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema que resuelve
+      description: Qué te impide hacer hoy el proyecto. Evita describir la solución aquí.
+      placeholder: "Cuando intento X, no puedo Y porque..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solucion
+    attributes:
+      label: Solución propuesta
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+    validations:
+      required: false
+
+  - type: dropdown
+    id: alcance
+    attributes:
+      label: Alcance estimado
+      options:
+        - Pequeño (un fichero, unas líneas)
+        - Medio (varios ficheros)
+        - Grande (cambio de arquitectura)
+        - No lo sé
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribuir
+    attributes:
+      label: ¿Te ofreces a implementarlo?
+      options:
+        - label: Estoy dispuesto/a a abrir un PR con esta funcionalidad.
+          required: false

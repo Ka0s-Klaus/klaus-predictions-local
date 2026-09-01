@@ -1,0 +1,14 @@
+# Propietarios por defecto de todo el repositorio.
+# Se les solicita revisión automáticamente en cada Pull Request.
+*                       @Ka0s-Klaus/ka0s-owners
+
+# Gobierno del repositorio, CI/CD y seguridad: solo owners.
+/.github/               @Ka0s-Klaus/ka0s-owners
+/LICENSE                @Ka0s-Klaus/ka0s-owners
+/SECURITY.md            @Ka0s-Klaus/ka0s-owners
+/CODE_OF_CONDUCT.md     @Ka0s-Klaus/ka0s-owners
+
+# Documentación: owners y developers.
+/README.md              @Ka0s-Klaus/ka0s-owners @Ka0s-Klaus/ka0s-developers
+/CONTRIBUTING.md        @Ka0s-Klaus/ka0s-owners @Ka0s-Klaus/ka0s-developers
+/docs/                  @Ka0s-Klaus/ka0s-owners @Ka0s-Klaus/ka0s-developers

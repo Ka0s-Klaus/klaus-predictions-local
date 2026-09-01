@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Preguntas y debate
+    url: https://github.com/Ka0s-Klaus/klaus-predictions-local/discussions
+    about: Para dudas de uso, ideas sin madurar o conversación general.
+  - name: 🔒 Reportar una vulnerabilidad
+    url: https://github.com/Ka0s-Klaus/klaus-predictions-local/security/advisories/new
+    about: Canal privado para fallos de seguridad. No uses issues públicos.
+  - name: 📖 Guía de contribución
+    url: https://github.com/Ka0s-Klaus/klaus-predictions-local/blob/main/CONTRIBUTING.md
+    about: Cómo trabajar en el proyecto antes de abrir un PR.

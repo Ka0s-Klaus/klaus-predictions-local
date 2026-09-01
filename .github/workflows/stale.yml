@@ -1,0 +1,42 @@
+name: Stale
+
+on:
+  schedule:
+    # Todos los días a las 04:17 UTC.
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    name: Marcar y cerrar inactivos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-issue-stale: 60
+          days-before-issue-close: 14
+          days-before-pr-stale: 30
+          days-before-pr-close: 7
+          stale-issue-label: stale
+          stale-pr-label: stale
+          exempt-issue-labels: "pinned,security,roadmap,help wanted,good first issue"
+          exempt-pr-labels: "pinned,security,work in progress"
+          exempt-all-milestones: true
+          stale-issue-message: >
+            Este issue lleva 60 días sin actividad y se ha marcado como `stale`.
+            Si sigue siendo relevante, deja un comentario y lo reabrimos en la cola.
+            Si no hay respuesta, se cerrará en 14 días.
+          close-issue-message: >
+            Se cierra por inactividad. No es un rechazo: si el problema persiste,
+            comenta aquí y lo reabrimos.
+          stale-pr-message: >
+            Este PR lleva 30 días sin actividad y se ha marcado como `stale`.
+            Actualízalo o comenta para mantenerlo abierto. Si no, se cerrará en 7 días.
+          close-pr-message: >
+            Se cierra por inactividad. Puedes reabrirlo cuando quieras retomarlo.
+          operations-per-run: 100
+          ascending: true

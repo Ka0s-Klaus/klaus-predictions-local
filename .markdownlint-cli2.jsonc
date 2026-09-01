@@ -1,0 +1,16 @@
+{
+  "config": {
+    "default": true,
+    // Permitimos líneas largas: los enlaces y tablas las hacen inevitables.
+    "MD013": false,
+    // Permitimos HTML embebido (comentarios en las plantillas, badges).
+    "MD033": false,
+    // No exigimos que el primer encabezado sea H1 en todos los ficheros.
+    "MD041": false,
+    // Los encabezados duplicados son legítimos en el CHANGELOG y las guías.
+    "MD024": { "siblings_only": true },
+    // Emoji al final de un encabezado no es puntuación.
+    "MD026": { "punctuation": ".,;:!" }
+  },
+  "ignores": ["node_modules/", ".github/ISSUE_TEMPLATE/"]
+}

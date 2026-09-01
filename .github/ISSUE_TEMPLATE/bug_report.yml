@@ -1,0 +1,85 @@
+name: 🐛 Reportar un bug
+description: Algo no funciona como debería
+title: "fix: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportarlo. Rellena los campos para que podamos reproducirlo.
+
+        ⚠️ **Si es un fallo de seguridad, no uses este formulario.** Sigue
+        [SECURITY.md](https://github.com/Ka0s-Klaus/klaus-predictions-local/blob/main/SECURITY.md).
+
+  - type: checkboxes
+    id: previos
+    attributes:
+      label: Comprobaciones previas
+      options:
+        - label: He buscado en los issues existentes y no hay uno igual.
+          required: true
+        - label: Estoy usando la última versión de `main`.
+          required: false
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción del problema
+      description: Qué ocurre, en una o dos frases.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduccion
+    attributes:
+      label: Pasos para reproducir
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamiento esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento actual
+      description: Incluye logs o trazas si los tienes.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión o commit
+      placeholder: "v0.1.0 o a1b2c3d"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: so
+    attributes:
+      label: Sistema operativo
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto adicional
+      description: Cualquier otra cosa relevante.
+    validations:
+      required: false

@@ -1,0 +1,143 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancela ejecuciones antiguas de la misma rama/PR.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pr-title:
+    name: Título del PR (Conventional Commits)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+
+  workflows:
+    name: Lint de workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: actionlint
+        uses: raven-actions/actionlint@v2
+        with:
+          fail-on-error: true
+
+  markdown:
+    name: Lint de Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: |
+            **/*.md
+            !CHANGELOG.md
+
+  build:
+    name: Build y tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- Python ---
+      - name: Configurar Python
+        if: hashFiles('pyproject.toml', 'requirements.txt', 'setup.py') != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Instalar y probar (Python)
+        if: hashFiles('pyproject.toml', 'requirements.txt', 'setup.py') != ''
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f pyproject.toml ] || [ -f setup.py ]; then pip install -e ".[dev]" || pip install -e . || true; fi
+          pip install ruff pytest
+          ruff check .
+          pytest -q
+
+      # --- Node ---
+      - name: Configurar Node
+        if: hashFiles('package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar y probar (Node)
+        if: hashFiles('package.json') != ''
+        run: |
+          npm ci || npm install
+          npm run lint --if-present
+          npm run build --if-present
+          npm test --if-present
+
+      # --- Go ---
+      - name: Configurar Go
+        if: hashFiles('go.mod') != ''
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: Compilar y probar (Go)
+        if: hashFiles('go.mod') != ''
+        run: |
+          go vet ./...
+          go build ./...
+          go test ./... -race -cover
+
+      # --- Rust ---
+      - name: Compilar y probar (Rust)
+        if: hashFiles('Cargo.toml') != ''
+        run: |
+          cargo fmt --check
+          cargo clippy -- -D warnings
+          cargo test
+
+      - name: Sin stack detectado
+        if: |
+          hashFiles('pyproject.toml', 'requirements.txt', 'setup.py', 'package.json', 'go.mod', 'Cargo.toml') == ''
+        run: echo "No hay stack definido todavía. Nada que compilar ni probar."
+
+  ci-ok:
+    name: CI OK
+    if: always()
+    needs: [pr-title, workflows, markdown, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar resultados
+        run: |
+          results='${{ join(needs.*.result, ' ') }}'
+          echo "Resultados de los jobs: $results"
+          for r in $results; do
+            if [ "$r" = "failure" ] || [ "$r" = "cancelled" ]; then
+              echo "::error::Al menos un job requerido no ha pasado."
+              exit 1
+            fi
+          done
+          echo "Todos los jobs requeridos han pasado."
