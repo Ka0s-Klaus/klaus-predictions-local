@@ -1,0 +1,17 @@
+# Dependencias del motor. La fuente de verdad es pyproject.toml; este fichero
+# existe para el flujo `pip install -r requirements.txt` de la guía de instalación.
+#
+# Extras opcionales:
+#   pip install -e ".[api]"          FastAPI + uvicorn
+#   pip install -e ".[postgres]"     driver de PostgreSQL
+#   pip install -e ".[embeddings]"   sentence-transformers (arrastra torch, ~1 GB)
+#   pip install -e ".[dev]"          pytest + ruff
+#
+# Nota: NO añadir `asyncio` como dependencia. El paquete homónimo de PyPI es un
+# backport obsoleto que ensombrece el módulo de la biblioteca estándar.
+
+aiohttp>=3.14
+pydantic>=2.13
+pydantic-settings>=2.15
+pyyaml>=6.0
+sqlalchemy>=2.0.52

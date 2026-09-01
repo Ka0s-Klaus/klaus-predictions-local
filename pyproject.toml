@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "klaus-predictions-local"
+version = "0.1.0"
+description = "Oráculo de predicción local-first: feeds públicos, enjambre de agentes y LLM en tu propia máquina"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Ka0s-Klaus" }]
+keywords = ["predictions", "local-first", "llm", "ollama", "forecasting"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+  "aiohttp>=3.14",
+  "pydantic>=2.13",
+  "pydantic-settings>=2.15",
+  "pyyaml>=6.0",
+  "sqlalchemy>=2.0.52",
+]
+
+[project.optional-dependencies]
+# La API y la UI llegan en fases posteriores; se declaran ya para que el
+# arranque de `engine.main` no dependa de instalar extras a mano.
+api = [
+  "fastapi>=0.141",
+  "uvicorn[standard]>=0.52",
+]
+# PostgreSQL en producción. En desarrollo y CI se usa SQLite, que va en stdlib.
+postgres = ["psycopg2-binary>=2.9.12"]
+# Embeddings: arrastra torch (~1 GB). Opcional a propósito para no penalizar
+# la instalación ni el CI de quien solo quiere el motor de predicción.
+embeddings = [
+  "numpy>=2.0",
+  "sentence-transformers>=6.0",
+]
+dev = [
+  "klaus-predictions-local[api]",
+  "pytest>=8.0",
+  "pytest-asyncio>=0.24",
+  "ruff>=0.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/Ka0s-Klaus/klaus-predictions-local"
+Issues = "https://github.com/Ka0s-Klaus/klaus-predictions-local/issues"
+
+[tool.setuptools.packages.find]
+include = ["engine*"]
+
+[tool.setuptools.package-data]
+engine = ["feeds/catalog.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "ASYNC"]
+ignore = [
+  # Los mensajes de excepción literales son más legibles que constantes sueltas.
+  "EM101",
+]
