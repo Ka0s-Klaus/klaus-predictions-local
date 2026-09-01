@@ -20,9 +20,13 @@ export default defineConfig({
     outDir: 'dist',
     // three.js pesa lo suyo; separarlo evita reconstruir el bundle entero en
     // cada cambio de la aplicación.
+    //
+    // Vite 8 usa rolldown, que exige `manualChunks` como función: la forma de
+    // objeto `{ three: ['three'] }` que aceptaba rollup falla con
+    // "manualChunks is not a function".
     rollupOptions: {
       output: {
-        manualChunks: { three: ['three'] },
+        manualChunks: (id) => (id.includes('node_modules/three') ? 'three' : undefined),
       },
     },
   },

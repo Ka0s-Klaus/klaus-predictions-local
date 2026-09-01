@@ -55,7 +55,7 @@ dictámenes en un JSON. Se pasa de siete generaciones a una.
 Ejecutada durante el desarrollo, sobre un modelo 7B cuantizado en CPU, con los
 siete agentes y el prompt multi-persona:
 
-```
+```text
 === LATENCIA REAL: 478.6s ===
 confianza    : 0.3714
 discrepancia : 0.0937

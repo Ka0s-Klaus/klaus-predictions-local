@@ -84,7 +84,7 @@ pip install -e ".[embeddings]"   # sentence-transformers (arrastra torch, ~1 GB)
 
 ### API
 
-```
+```text
 GET  /health              estado del servicio
 GET  /agent/view          resumen del estado del mundo
 GET  /agent/events        eventos ingeridos, filtrables

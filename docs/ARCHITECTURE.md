@@ -2,7 +2,7 @@
 
 ## El recorrido de una predicción
 
-```
+```text
   Fuentes públicas
         │  ingesta concurrente, 4 workers, cada 15 min
         ▼
