@@ -107,7 +107,7 @@ class TestCatalog:
     def test_implementadas_y_pendientes_suman_el_total(self) -> None:
         total = len(load_catalog())
 
-        assert len(implemented_entries()) == 8
+        assert len(implemented_entries()) == 11
         assert len(implemented_entries()) + len(planned_entries()) == total
 
     def test_las_pendientes_no_inventan_endpoint(self) -> None:
@@ -417,6 +417,106 @@ class TestParsers:
 
     def test_crypto_sin_precio_se_omite(self) -> None:
         assert CryptoPrices().parse({"x": {"usd_24h_change": 1.0}}) == []
+
+    def test_cisa_kev(self) -> None:
+        from engine.feeds.sources.cisa_kev import CISAKEVulnerabilities
+
+        payload = {
+            "vulnerabilities": [
+                {
+                    "cveID": "CVE-2024-1234",
+                    "vulnDescription": "Remote code execution in XYZ",
+                    "dateAdded": "2026-09-01T00:00:00Z",
+                },
+                {
+                    "cveID": "CVE-2024-5678",
+                    "vulnDescription": "Buffer overflow in ABC",
+                    "dateAdded": "2026-08-31T00:00:00Z",
+                },
+            ]
+        }
+
+        eventos = CISAKEVulnerabilities().parse(payload)
+
+        assert len(eventos) == 2
+        assert all(e.event_type == "kev_exploit" for e in eventos)
+        assert all(e.salience == 0.9 for e in eventos)
+        assert eventos[0].external_id == "CVE-2024-1234"
+
+    def test_cisa_kev_sin_cve_id_se_omite(self) -> None:
+        from engine.feeds.sources.cisa_kev import CISAKEVulnerabilities
+
+        payload = {
+            "vulnerabilities": [
+                {"vulnDescription": "Sin CVE"},
+                {"cveID": "CVE-2024-1234", "vulnDescription": "Válido"},
+            ]
+        }
+
+        eventos = CISAKEVulnerabilities().parse(payload)
+
+        assert len(eventos) == 1
+        assert eventos[0].external_id == "CVE-2024-1234"
+
+    def test_reliefweb(self) -> None:
+        from engine.feeds.sources.reliefweb import ReliefWebSituations
+
+        payload = {
+            "data": [
+                {
+                    "id": "rw1",
+                    "fields": {
+                        "title": "Flooding in Kenya",
+                        "body": "Heavy rains causing displacement",
+                        "primary_country": [{"name": "Kenya"}],
+                        "disaster": [{"name": "Floods"}],
+                        "date": {"original": "2026-09-01T00:00:00Z"},
+                    },
+                },
+                {
+                    "id": "rw2",
+                    "fields": {
+                        "title": "Conflict",
+                        "primary_country": [{"name": "A"}, {"name": "B"}],
+                        "disaster": [{"name": "X"}, {"name": "Y"}, {"name": "Z"}],
+                        "date": {"original": "2026-09-01T00:00:00Z"},
+                    },
+                },
+            ]
+        }
+
+        eventos = ReliefWebSituations().parse(payload)
+
+        assert len(eventos) == 2
+        assert eventos[0].salience > 0.4
+        assert eventos[1].salience > eventos[0].salience  # Más desastres/países
+
+    def test_reliefweb_sin_titulo_se_omite(self) -> None:
+        from engine.feeds.sources.reliefweb import ReliefWebSituations
+
+        payload = {"data": [{"id": "rw1", "fields": {"title": "", "primary_country": []}}]}
+
+        assert ReliefWebSituations().parse(payload) == []
+
+    def test_open_meteo(self) -> None:
+        from engine.feeds.sources.open_meteo import OpenMeteoWeather
+
+        # Open-Meteo devuelve arrays horarios; aquí simulamos 6 horas de datos
+        payload = {
+            "hourly": [
+                {
+                    "temperature_2m": [20.0, 21.0, 22.0, 25.0, 28.0, 32.0],
+                    "precipitation": [0.0, 0.0, 1.0, 2.0, 3.0, 15.0],
+                }
+            ]
+        }
+
+        eventos = OpenMeteoWeather().parse(payload)
+
+        assert len(eventos) == 1
+        assert eventos[0].source == "Open-Meteo"
+        # Lluvia intensa y temperatura elevada
+        assert eventos[0].salience > 0.65
 
 
 # ---------------------------------------------------------------------
