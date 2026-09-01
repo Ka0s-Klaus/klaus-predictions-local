@@ -44,6 +44,9 @@ embeddings = [
 ]
 dev = [
   "klaus-predictions-local[api]",
+  # httpx aporta el ASGITransport con el que la suite habla con la app sin
+  # levantar un servidor.
+  "httpx>=0.28",
   "pytest>=8.0",
   "pytest-asyncio>=0.24",
   "ruff>=0.9",

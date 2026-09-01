@@ -1,0 +1,41 @@
+klaus-predictions-local (Pythia)
+Copyright (c) 2026 Ka0s-Klaus
+Distribuido bajo licencia MIT (ver LICENSE).
+
+------------------------------------------------------------------------
+Atribución
+------------------------------------------------------------------------
+
+Este proyecto es una implementación propia, escrita desde una
+especificación interna. Esa especificación, sin embargo, deriva del
+trabajo previo de:
+
+    Pythia — jangles-byte
+    https://github.com/jangles-byte/Pythia
+    Licencia MIT
+
+De ese proyecto proceden el concepto del oráculo de predicción local
+sobre feeds públicos y modelo local, la nomenclatura "MiroFish" para el
+enjambre de agentes y "Osiris" para la interfaz, y la forma general de
+la API.
+
+El código de este repositorio no se ha copiado del suyo: la arquitectura
+difiere (aquí el paquete `engine` está organizado en subpaquetes en lugar
+de plano, el enjambre resuelve los siete agentes en una única llamada al
+modelo, y las fuentes se declaran en un catálogo YAML). Aun así, el
+reconocimiento corresponde: sin ese proyecto este no existiría.
+
+------------------------------------------------------------------------
+Fuentes de datos
+------------------------------------------------------------------------
+
+Pythia consume APIs públicas de terceros. Cada una tiene sus propios
+términos de uso y sus propios límites de peticiones; consúltalos antes de
+desplegar nada en producción. El catálogo completo, con enlaces, está en
+`engine/feeds/catalog.yaml` y resumido en `docs/FEEDS.md`.
+
+Entre ellas: USGS, NASA EONET, NOAA (NWS, NHC, SWPC), GDELT Project,
+Frankfurter (tipos del BCE) y CoinGecko.
+
+Este proyecto no está afiliado ni respaldado por ninguna de esas
+organizaciones.

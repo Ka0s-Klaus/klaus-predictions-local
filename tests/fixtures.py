@@ -79,8 +79,9 @@ def agent_payload(confidence: float = 0.72) -> str:
 class FakeLLM:
     """Cliente LLM programable. Cumple el `Protocol` de `engine.llm.LLMClient`."""
 
-    def __init__(self, responses: list[str] | str) -> None:
+    def __init__(self, responses: list[str] | str, available: bool = True) -> None:
         self.responses = [responses] if isinstance(responses, str) else list(responses)
+        self.available = available
         self.calls: list[dict[str, Any]] = []
 
     async def generate(
@@ -103,6 +104,9 @@ class FakeLLM:
             raise AssertionError("FakeLLM se quedó sin respuestas programadas")
         # La última respuesta se repite para no obligar a contar llamadas exactas.
         return self.responses.pop(0) if len(self.responses) > 1 else self.responses[0]
+
+    async def is_available(self) -> bool:
+        return self.available
 
     @property
     def call_count(self) -> int:

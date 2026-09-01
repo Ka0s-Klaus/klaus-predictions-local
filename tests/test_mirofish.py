@@ -75,6 +75,34 @@ class TestSwarmRun:
         assert "Astrologer" not in result.agent_votes
         assert len(result.agent_votes) == 7
 
+    async def test_descarta_fuentes_que_no_estaban_en_el_contexto(self) -> None:
+        """Un modelo pequeño copió literalmente el "…" del esquema de ejemplo.
+
+        Observado en una ejecución real: `sources_used: ["…"]`. Citar una
+        fuente inexistente es peor que no citar ninguna.
+        """
+        payload = json.loads(swarm_payload())
+        for verdict in payload["verdicts"].values():
+            verdict["sources_used"] = ["…", "USGS", "Inventada"]
+        llm = FakeLLM(json.dumps(payload))
+        swarm = MiroFishSwarm(build_agents(llm), llm)
+
+        result = await swarm.run("¿Anomalías?", {"events": SAMPLE_EVENTS})
+
+        assert result.sources_used == ["USGS"]
+
+    async def test_sin_contexto_no_se_filtra_por_fuente(self) -> None:
+        """Sin eventos no hay contra qué contrastar; sólo caen los marcadores."""
+        payload = json.loads(swarm_payload())
+        for verdict in payload["verdicts"].values():
+            verdict["sources_used"] = ["…", "GDELT"]
+        llm = FakeLLM(json.dumps(payload))
+        swarm = MiroFishSwarm(build_agents(llm), llm)
+
+        result = await swarm.run("¿Anomalías?", {"events": []})
+
+        assert result.sources_used == ["GDELT"]
+
     async def test_enjambre_vacio_es_error_de_programacion(self) -> None:
         with pytest.raises(ValueError, match="al menos un agente"):
             MiroFishSwarm([], FakeLLM("{}"))

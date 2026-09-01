@@ -11,6 +11,9 @@ secrets.yaml
 data/
 datasets/
 models/
+# Base de datos de desarrollo: SQLite es el motor por defecto.
+*.db
+*.sqlite3
 *.ckpt
 *.safetensors
 *.gguf
