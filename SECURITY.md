@@ -26,10 +26,10 @@ Incluye en el reporte:
 
 ## Qué esperar
 
-| Fase                      | Plazo objetivo    |
-| ------------------------- | ----------------- |
-| Acuse de recibo           | 72 horas          |
-| Evaluación inicial        | 7 días naturales  |
+| Fase                        | Plazo objetivo    |
+| --------------------------- | ----------------- |
+| Acuse de recibo             | 72 horas          |
+| Evaluación inicial          | 7 días naturales  |
 | Corrección o plan de acción | 30 días naturales |
 
 Te mantendremos informado durante el proceso. Si el reporte se confirma,
