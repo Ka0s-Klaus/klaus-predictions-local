@@ -1,0 +1,419 @@
+# Catálogo de fuentes de Pythia
+#
+# `status: implemented` significa que hay una clase en engine/feeds/sources/ y
+# que su endpoint se ha comprobado contra el servicio real. El endpoint vive en
+# la clase, no aquí, para que no haya dos sitios que se puedan desincronizar.
+#
+# `status: planned` es una fuente identificada pero sin código. NO se inventa su
+# ruta de API: se deja el `homepage` y una nota con lo que falta por resolver.
+# Añadir una fuente = implementar la clase, registrarla en sources/__init__.py
+# y cambiar aquí el status.
+
+version: 1
+
+sources:
+  # ------------------------------------------------------------------
+  # Desastres naturales
+  # ------------------------------------------------------------------
+  - key: usgs_earthquakes
+    name: USGS
+    domain: disasters
+    status: implemented
+    homepage: https://earthquake.usgs.gov/earthquakes/feed/
+    description: Sismos de magnitud 4.5+ en las últimas 24 horas.
+
+  - key: eonet
+    name: EONET
+    domain: disasters
+    status: implemented
+    homepage: https://eonet.gsfc.nasa.gov/
+    description: Agregador de la NASA de eventos naturales abiertos.
+
+  - key: gdacs
+    name: GDACS
+    domain: disasters
+    status: planned
+    homepage: https://www.gdacs.org/
+    description: Sistema global de alerta y coordinación de desastres.
+    notes: Sirve RSS/XML de ~1 MB. Requiere un parser XML resistente a XML bombs.
+
+  - key: firms_wildfire
+    name: FIRMS
+    domain: disasters
+    status: planned
+    requires_key: true
+    homepage: https://firms.modaps.eosdis.nasa.gov/
+    description: Focos de incendio detectados por VIIRS y MODIS.
+    notes: Exige MAP_KEY. Sin ella la API responde 400 "Invalid MAP_KEY".
+
+  - key: smithsonian_volcano
+    name: GVP
+    domain: disasters
+    status: planned
+    homepage: https://volcano.si.edu/
+    description: Informe semanal de actividad volcánica.
+
+  - key: usgs_volcano
+    name: USGS-Volcano
+    domain: disasters
+    status: planned
+    homepage: https://volcanoes.usgs.gov/
+    description: Niveles de alerta de los volcanes de Estados Unidos.
+
+  - key: ptwc_tsunami
+    name: PTWC
+    domain: disasters
+    status: planned
+    homepage: https://www.tsunami.gov/
+    description: Avisos de tsunami del Pacífico.
+
+  - key: usgs_water
+    name: USGS-Water
+    domain: disasters
+    status: planned
+    homepage: https://waterservices.usgs.gov/
+    description: Caudales y niveles de inundación.
+
+  - key: copernicus_ems
+    name: Copernicus-EMS
+    domain: disasters
+    status: planned
+    homepage: https://emergency.copernicus.eu/
+    description: Activaciones del servicio europeo de gestión de emergencias.
+
+  - key: glofas_floods
+    name: GloFAS
+    domain: disasters
+    status: planned
+    homepage: https://global-flood.emergency.copernicus.eu/
+    description: Sistema global de alerta temprana de inundaciones.
+
+  # ------------------------------------------------------------------
+  # Meteorología y clima
+  # ------------------------------------------------------------------
+  - key: nws_alerts
+    name: NWS
+    domain: weather
+    status: implemented
+    homepage: https://www.weather.gov/documentation/services-web-api
+    description: Avisos meteorológicos activos de severidad extrema o alta.
+
+  - key: nhc_storms
+    name: NHC
+    domain: weather
+    status: implemented
+    homepage: https://www.nhc.noaa.gov/
+    description: Ciclones tropicales activos en Atlántico y Pacífico oriental.
+
+  - key: noaa_swpc
+    name: SWPC
+    domain: space-weather
+    status: implemented
+    homepage: https://www.swpc.noaa.gov/
+    description: "Alertas de clima espacial: tormentas geomagnéticas y radiación."
+
+  - key: open_meteo
+    name: Open-Meteo
+    domain: weather
+    status: planned
+    homepage: https://open-meteo.com/
+    description: Previsión y anomalías meteorológicas sin clave.
+    notes: Endpoint verificado y sin clave. Es la siguiente más fácil de añadir.
+
+  - key: enso_index
+    name: ENSO
+    domain: climate
+    status: planned
+    homepage: https://www.cpc.ncep.noaa.gov/products/precip/CWlink/MJO/enso.shtml
+    description: Índice oceánico de El Niño / La Niña.
+
+  - key: nsidc_sea_ice
+    name: NSIDC
+    domain: climate
+    status: planned
+    homepage: https://nsidc.org/arcticseaicenews/
+    description: Extensión del hielo marino ártico y antártico.
+
+  - key: cams_air_quality
+    name: CAMS
+    domain: climate
+    status: planned
+    homepage: https://atmosphere.copernicus.eu/
+    description: Calidad del aire y transporte de aerosoles.
+
+  - key: drought_monitor
+    name: DroughtMonitor
+    domain: climate
+    status: planned
+    homepage: https://droughtmonitor.unl.edu/
+    description: Severidad y extensión de la sequía.
+
+  - key: noaa_ghcn
+    name: GHCN
+    domain: climate
+    status: planned
+    homepage: https://www.ncei.noaa.gov/products/land-based-station/
+    description: Anomalías de temperatura de estaciones terrestres.
+
+  # ------------------------------------------------------------------
+  # Energía y red eléctrica
+  # ------------------------------------------------------------------
+  - key: caiso
+    name: CAISO
+    domain: energy
+    status: planned
+    homepage: https://www.caiso.com/todays-outlook
+    description: Demanda, reservas y mezcla de generación de la red de California.
+    notes: >
+      El endpoint que aparece en la documentación de partida
+      (caiso.com/outlook/SP/fuelsource.csv) devuelve 404. Hay que localizar la
+      ruta pública vigente antes de implementarla.
+
+  - key: eia_grid
+    name: EIA
+    domain: energy
+    status: planned
+    requires_key: true
+    homepage: https://www.eia.gov/opendata/
+    description: Datos horarios de la red eléctrica de Estados Unidos.
+
+  - key: entsoe
+    name: ENTSO-E
+    domain: energy
+    status: planned
+    requires_key: true
+    homepage: https://transparency.entsoe.eu/
+    description: Transparencia del sistema eléctrico europeo.
+
+  - key: elexon_bmrs
+    name: Elexon
+    domain: energy
+    status: planned
+    homepage: https://bmrs.elexon.co.uk/
+    description: Datos del mercado eléctrico británico.
+
+  - key: ercot
+    name: ERCOT
+    domain: energy
+    status: planned
+    homepage: https://www.ercot.com/gridmktinfo
+    description: Condiciones de la red de Texas.
+
+  - key: oil_prices
+    name: Oil
+    domain: commodities
+    status: planned
+    homepage: https://www.eia.gov/petroleum/
+    description: Precios de referencia del crudo Brent y WTI.
+
+  # ------------------------------------------------------------------
+  # Mercados financieros
+  # ------------------------------------------------------------------
+  - key: forex_ecb
+    name: Forex
+    domain: markets
+    status: implemented
+    homepage: https://frankfurter.dev/
+    description: Tipos de cambio de referencia del Banco Central Europeo.
+
+  - key: crypto_prices
+    name: Crypto
+    domain: markets
+    status: implemented
+    homepage: https://www.coingecko.com/en/api
+    description: Precios y variación a 24 h de las principales criptomonedas.
+
+  - key: equity_indices
+    name: Equities
+    domain: markets
+    status: planned
+    homepage: https://stooq.com/
+    description: Índices bursátiles principales.
+    notes: Stooq sirve CSV sin clave; falta decidir la cesta de índices.
+
+  - key: treasury_yields
+    name: Treasury
+    domain: markets
+    status: planned
+    homepage: https://home.treasury.gov/interest-rates-data-csv-archive
+    description: Curva de tipos del Tesoro estadounidense.
+
+  - key: worldbank_indicators
+    name: WorldBank
+    domain: macro
+    status: planned
+    homepage: https://datahelpdesk.worldbank.org/knowledgebase/topics/125589
+    description: Indicadores macroeconómicos por país.
+
+  - key: polymarket
+    name: Polymarket
+    domain: markets
+    status: planned
+    homepage: https://docs.polymarket.com/
+    description: Probabilidades implícitas de mercados de predicción.
+    notes: >
+      Interesante como contraste: da una probabilidad de mercado con la que
+      comparar la del enjambre.
+
+  - key: fred_macro
+    name: FRED
+    domain: macro
+    status: planned
+    requires_key: true
+    homepage: https://fred.stlouisfed.org/docs/api/fred/
+    description: Series macroeconómicas de la Reserva Federal de San Luis.
+
+  - key: edgar_insider
+    name: EDGAR
+    domain: markets
+    status: planned
+    homepage: https://www.sec.gov/edgar/sec-api-documentation
+    description: Operaciones de iniciados registradas en la SEC.
+
+  # ------------------------------------------------------------------
+  # Geopolítica, conflicto y sanciones
+  # ------------------------------------------------------------------
+  - key: gdelt
+    name: GDELT
+    domain: geopolitical
+    status: implemented
+    homepage: https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/
+    description: Cobertura mediática global de conflicto, sanciones y crisis.
+    notes: >
+      API pública con límite de peticiones estricto. Las consultas por `theme:`
+      agotan el tiempo de espera con frecuencia; se usa búsqueda por palabras
+      clave. Se cuenta con que falle de vez en cuando.
+
+  - key: ofac_sanctions
+    name: OFAC
+    domain: sanctions
+    status: planned
+    homepage: https://sanctionslist.ofac.treas.gov/Home/SdnList
+    description: Lista de personas y entidades sancionadas por Estados Unidos.
+
+  - key: eu_sanctions
+    name: EU-Sanctions
+    domain: sanctions
+    status: planned
+    homepage: https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions
+    description: Lista consolidada de sanciones financieras de la Unión Europea.
+
+  - key: un_sanctions
+    name: UN-Sanctions
+    domain: sanctions
+    status: planned
+    homepage: https://scsanctions.un.org/
+    description: Lista consolidada del Consejo de Seguridad de Naciones Unidas.
+
+  - key: acled
+    name: ACLED
+    domain: conflict
+    status: planned
+    requires_key: true
+    homepage: https://acleddata.com/data-export-tool/
+    description: Eventos de conflicto armado y protestas, georreferenciados.
+
+  - key: ucdp
+    name: UCDP
+    domain: conflict
+    status: planned
+    homepage: https://ucdp.uu.se/apidocs/
+    description: Base de datos de conflictos de la Universidad de Uppsala.
+
+  # ------------------------------------------------------------------
+  # Ciberseguridad e infraestructura digital
+  # ------------------------------------------------------------------
+  - key: cisa_kev
+    name: CISA-KEV
+    domain: cyber
+    status: planned
+    homepage: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+    description: Vulnerabilidades con explotación confirmada en la práctica.
+    notes: JSON sin clave y de formato estable. Candidata clara para la siguiente tanda.
+
+  - key: nvd_cve
+    name: NVD
+    domain: cyber
+    status: planned
+    homepage: https://nvd.nist.gov/developers/vulnerabilities
+    description: Vulnerabilidades publicadas con su puntuación CVSS.
+
+  - key: ioda_outages
+    name: IODA
+    domain: infrastructure
+    status: planned
+    homepage: https://ioda.inetintel.cc.gatech.edu/
+    description: Detección de cortes de conectividad a internet por país.
+
+  - key: cloudflare_radar
+    name: Cloudflare-Radar
+    domain: infrastructure
+    status: planned
+    requires_key: true
+    homepage: https://developers.cloudflare.com/radar/
+    description: Tráfico de internet, ataques y anomalías de enrutamiento.
+
+  - key: hacker_news
+    name: HackerNews
+    domain: technology
+    status: planned
+    homepage: https://hn.algolia.com/api
+    description: Señal temprana de incidentes técnicos y tecnología emergente.
+
+  # ------------------------------------------------------------------
+  # Humanitario y salud pública
+  # ------------------------------------------------------------------
+  - key: who_outbreaks
+    name: WHO
+    domain: health
+    status: planned
+    homepage: https://www.who.int/emergencies/disease-outbreak-news
+    description: Noticias oficiales sobre brotes de enfermedades.
+
+  - key: unhcr_displacement
+    name: UNHCR
+    domain: humanitarian
+    status: planned
+    homepage: https://api.unhcr.org/docs/
+    description: Cifras de desplazamiento forzoso y refugiados.
+
+  - key: reliefweb
+    name: ReliefWeb
+    domain: humanitarian
+    status: planned
+    homepage: https://apidoc.reliefweb.int/
+    description: Informes de situación de crisis humanitarias.
+    notes: API sin clave, bien documentada. Otra candidata fácil.
+
+  - key: cdc_wastewater
+    name: CDC-Wastewater
+    domain: health
+    status: planned
+    homepage: https://data.cdc.gov/
+    description: Vigilancia de patógenos en aguas residuales.
+
+  # ------------------------------------------------------------------
+  # Transporte y logística
+  # ------------------------------------------------------------------
+  - key: maritime_ais
+    name: Maritime
+    domain: logistics
+    status: planned
+    requires_key: true
+    homepage: https://www.marinetraffic.com/en/ais-api-services
+    description: Tráfico marítimo y congestión de puertos y estrechos.
+
+  - key: flight_tracking
+    name: Flights
+    domain: logistics
+    status: planned
+    homepage: https://openskynetwork.github.io/opensky-api/
+    description: Tráfico aéreo, cierres de espacio aéreo y desvíos.
+
+  - key: notam_airspace
+    name: NOTAM
+    domain: logistics
+    status: planned
+    requires_key: true
+    homepage: https://api.faa.gov/
+    description: Avisos a la navegación aérea y restricciones de espacio aéreo.
