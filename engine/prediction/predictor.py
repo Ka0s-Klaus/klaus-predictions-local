@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
-from collections.abc import Callable, Sequence
+from collections.abc import Awaitable, Callable, Sequence
 from typing import Any
 
 from sqlalchemy import select
@@ -24,7 +24,7 @@ DEFAULT_HORIZONS = ("24h", "week", "month", "year")
 ContextProvider = Callable[[str, int], Sequence[dict[str, Any]]]
 
 # Callback de progreso: async (status: str, progress: dict) para streaming
-ProgressCallback = Callable[[str, dict[str, Any]], asyncio.Awaitable[None]]
+ProgressCallback = Callable[[str, dict[str, Any]], Awaitable[None]]
 
 
 class Predictor:
