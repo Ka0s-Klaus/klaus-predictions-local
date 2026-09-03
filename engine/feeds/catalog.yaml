@@ -411,3 +411,76 @@ sources:
     requires_key: true
     homepage: https://api.faa.gov/
     description: Avisos a la navegación aérea y restricciones de espacio aéreo.
+
+  # ------------------------------------------------------------------
+  # Inteligencia Artificial y Machine Learning
+  # ------------------------------------------------------------------
+  - key: openai_announcements
+    name: OpenAI
+    domain: technology
+    status: implemented
+    homepage: https://openai.com/research
+    description: Anuncios de OpenAI y publicaciones de investigación.
+
+  - key: huggingface_models
+    name: HuggingFace
+    domain: technology
+    status: implemented
+    homepage: https://huggingface.co/models
+    description: Modelos tendencia y nuevos releases en HuggingFace.
+
+  - key: arxiv_ml
+    name: arXiv-ML
+    domain: research
+    status: implemented
+    homepage: https://arxiv.org/list/cs.AI/recent
+    description: Últimos papers de IA y Machine Learning en arXiv.
+
+  - key: anthropic_research
+    name: Anthropic
+    domain: technology
+    status: implemented
+    homepage: https://www.anthropic.com/research
+    description: Investigación y anuncios de Anthropic.
+
+  - key: papers_with_code
+    name: Papers-with-Code
+    domain: research
+    status: implemented
+    homepage: https://paperswithcode.com/
+    description: Papers de investigación con implementación de código.
+
+  - key: llm_safety_alignment
+    name: LLM-Safety
+    domain: research
+    status: implemented
+    homepage: https://arxiv.org/list/cs.CY/recent
+    description: Investigación en seguridad e alineación de LLMs.
+
+  - key: ai_regulation_tracker
+    name: AI-Policy
+    domain: policy
+    status: implemented
+    homepage: https://huggingface.co/datasets
+    description: Seguimiento de regulación y política de IA.
+
+  - key: llm_leaderboards
+    name: Benchmarks
+    domain: technology
+    status: implemented
+    homepage: https://huggingface.co/spaces
+    description: Leaderboards y benchmarks de modelos de IA.
+
+  - key: ai_security_vulnerabilities
+    name: AI-Security
+    domain: cyber
+    status: implemented
+    homepage: https://arxiv.org/list/cs.CR/recent
+    description: Vulnerabilidades y ataques adversariales en IA.
+
+  - key: model_releases
+    name: Model-Releases
+    domain: technology
+    status: implemented
+    homepage: https://huggingface.co/models
+    description: Nuevos modelos de IA lanzados recientemente.

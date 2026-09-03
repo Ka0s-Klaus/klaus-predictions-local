@@ -5,6 +5,10 @@ de `catalog.yaml` tienen código detrás.
 """
 
 from engine.feeds.sources.base import FeedError, FeedSource
+from engine.feeds.sources.ai_regulation_tracker import AIRegulationTracker
+from engine.feeds.sources.ai_security_vulnerabilities import AISafetyVulnerabilities
+from engine.feeds.sources.anthropic_research import AnthropicResearch
+from engine.feeds.sources.arxiv_ml import ArxivML
 from engine.feeds.sources.cdc_wastewater import CDCWastewater
 from engine.feeds.sources.cisa_kev import CISAKEVulnerabilities
 from engine.feeds.sources.copernicus_ems import CopernicusEMS
@@ -23,7 +27,11 @@ from engine.feeds.sources.gdacs import GDACSDisasters
 from engine.feeds.sources.gdelt import GDELT
 from engine.feeds.sources.glofas_floods import GloFASFloods
 from engine.feeds.sources.hacker_news import HackerNews
+from engine.feeds.sources.huggingface_models import HuggingFaceModels
 from engine.feeds.sources.ioda_outages import IODAOutages
+from engine.feeds.sources.llm_leaderboards import LLMLeaderboards
+from engine.feeds.sources.llm_safety_alignment import LLMSafetyAlignment
+from engine.feeds.sources.model_releases import ModelReleases
 from engine.feeds.sources.nhc import NHCStorms
 from engine.feeds.sources.nsidc_sea_ice import NSIDCSeaIce
 from engine.feeds.sources.nws import NWSAlerts
@@ -31,6 +39,8 @@ from engine.feeds.sources.nvd_cve import NVDVulnerabilities
 from engine.feeds.sources.ofac_sanctions import OFACSanctions
 from engine.feeds.sources.oil_prices import OilPrices
 from engine.feeds.sources.open_meteo import OpenMeteoWeather
+from engine.feeds.sources.openai_announcements import OpenAIAnnouncements
+from engine.feeds.sources.papers_with_code import PapersWithCode
 from engine.feeds.sources.polymarket import Polymarket
 from engine.feeds.sources.ptwc_tsunami import PTWCTsunami
 from engine.feeds.sources.reliefweb import ReliefWebSituations
@@ -95,9 +105,24 @@ IMPLEMENTATIONS: dict[str, type[FeedSource]] = {
     "cdc_wastewater": CDCWastewater,
     # Transporte y logística
     "flight_tracking": OpenSkyFlights,
+    # Inteligencia Artificial y Machine Learning
+    "openai_announcements": OpenAIAnnouncements,
+    "huggingface_models": HuggingFaceModels,
+    "arxiv_ml": ArxivML,
+    "anthropic_research": AnthropicResearch,
+    "papers_with_code": PapersWithCode,
+    "llm_safety_alignment": LLMSafetyAlignment,
+    "ai_regulation_tracker": AIRegulationTracker,
+    "llm_leaderboards": LLMLeaderboards,
+    "ai_security_vulnerabilities": AISafetyVulnerabilities,
+    "model_releases": ModelReleases,
 }
 
 __all__ = [
+    "AIRegulationTracker",
+    "AISafetyVulnerabilities",
+    "AnthropicResearch",
+    "ArxivML",
     "CDCWastewater",
     "CISAKEVulnerabilities",
     "CopernicusEMS",
@@ -117,16 +142,22 @@ __all__ = [
     "GDACSDisasters",
     "GloFASFloods",
     "HackerNews",
+    "HuggingFaceModels",
     "IMPLEMENTATIONS",
     "IODAOutages",
+    "LLMLeaderboards",
+    "LLMSafetyAlignment",
+    "ModelReleases",
     "NHCStorms",
     "NSIDCSeaIce",
     "NWSAlerts",
     "NVDVulnerabilities",
     "OFACSanctions",
     "OilPrices",
+    "OpenAIAnnouncements",
     "OpenMeteoWeather",
     "OpenSkyFlights",
+    "PapersWithCode",
     "Polymarket",
     "PTWCTsunami",
     "ReliefWebSituations",
