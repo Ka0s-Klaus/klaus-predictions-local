@@ -23,8 +23,8 @@ DEFAULT_HORIZONS = ("24h", "week", "month", "year")
 # En esta fase se inyecta desde fuera; la fase de feeds enchufará el ingestor.
 ContextProvider = Callable[[str, int], Sequence[dict[str, Any]]]
 
-# Callback de progreso: (status: str, progress: dict) para streaming
-ProgressCallback = Callable[[str, dict[str, Any]], None]
+# Callback de progreso: async (status: str, progress: dict) para streaming
+ProgressCallback = Callable[[str, dict[str, Any]], asyncio.Awaitable[None]]
 
 
 class Predictor:
@@ -69,7 +69,7 @@ class Predictor:
 
         # Emite inicio
         if on_progress:
-            on_progress("started", {"agents": len(self.swarm.agents)})
+            await on_progress("started", {"agents": len(self.swarm.agents)})
 
         started = time.perf_counter()
         consensus = await self.swarm.run(query, {"events": events}, horizon=horizon)
@@ -77,7 +77,7 @@ class Predictor:
 
         # Emite completado
         if on_progress:
-            on_progress("completed", {"latency_ms": latency_ms})
+            await on_progress("completed", {"latency_ms": latency_ms})
 
         result: dict[str, Any] = {
             "prediction_id": None,
