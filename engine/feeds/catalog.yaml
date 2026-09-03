@@ -32,10 +32,9 @@ sources:
   - key: gdacs
     name: GDACS
     domain: disasters
-    status: planned
+    status: implemented
     homepage: https://www.gdacs.org/
     description: Sistema global de alerta y coordinación de desastres.
-    notes: Sirve RSS/XML de ~1 MB. Requiere un parser XML resistente a XML bombs.
 
   - key: firms_wildfire
     name: FIRMS
@@ -49,42 +48,42 @@ sources:
   - key: smithsonian_volcano
     name: GVP
     domain: disasters
-    status: planned
+    status: implemented
     homepage: https://volcano.si.edu/
     description: Informe semanal de actividad volcánica.
 
   - key: usgs_volcano
     name: USGS-Volcano
     domain: disasters
-    status: planned
+    status: implemented
     homepage: https://volcanoes.usgs.gov/
     description: Niveles de alerta de los volcanes de Estados Unidos.
 
   - key: ptwc_tsunami
     name: PTWC
     domain: disasters
-    status: planned
+    status: implemented
     homepage: https://www.tsunami.gov/
     description: Avisos de tsunami del Pacífico.
 
   - key: usgs_water
     name: USGS-Water
     domain: disasters
-    status: planned
+    status: implemented
     homepage: https://waterservices.usgs.gov/
     description: Caudales y niveles de inundación.
 
   - key: copernicus_ems
     name: Copernicus-EMS
     domain: disasters
-    status: planned
+    status: implemented
     homepage: https://emergency.copernicus.eu/
     description: Activaciones del servicio europeo de gestión de emergencias.
 
   - key: glofas_floods
     name: GloFAS
     domain: disasters
-    status: planned
+    status: implemented
     homepage: https://global-flood.emergency.copernicus.eu/
     description: Sistema global de alerta temprana de inundaciones.
 
@@ -122,14 +121,14 @@ sources:
   - key: enso_index
     name: ENSO
     domain: climate
-    status: planned
+    status: implemented
     homepage: https://www.cpc.ncep.noaa.gov/products/precip/CWlink/MJO/enso.shtml
     description: Índice oceánico de El Niño / La Niña.
 
   - key: nsidc_sea_ice
     name: NSIDC
     domain: climate
-    status: planned
+    status: implemented
     homepage: https://nsidc.org/arcticseaicenews/
     description: Extensión del hielo marino ártico y antártico.
 
@@ -143,7 +142,7 @@ sources:
   - key: drought_monitor
     name: DroughtMonitor
     domain: climate
-    status: planned
+    status: implemented
     homepage: https://droughtmonitor.unl.edu/
     description: Severidad y extensión de la sequía.
 
@@ -153,6 +152,7 @@ sources:
     status: planned
     homepage: https://www.ncei.noaa.gov/products/land-based-station/
     description: Anomalías de temperatura de estaciones terrestres.
+    notes: Requiere parseo de formato binario HDF5; dejada para fase posterior.
 
   # ------------------------------------------------------------------
   # Energía y red eléctrica
@@ -187,21 +187,21 @@ sources:
   - key: elexon_bmrs
     name: Elexon
     domain: energy
-    status: planned
+    status: implemented
     homepage: https://bmrs.elexon.co.uk/
     description: Datos del mercado eléctrico británico.
 
   - key: ercot
     name: ERCOT
     domain: energy
-    status: planned
+    status: implemented
     homepage: https://www.ercot.com/gridmktinfo
     description: Condiciones de la red de Texas.
 
   - key: oil_prices
     name: Oil
     domain: commodities
-    status: planned
+    status: implemented
     homepage: https://www.eia.gov/petroleum/
     description: Precios de referencia del crudo Brent y WTI.
 
@@ -225,34 +225,30 @@ sources:
   - key: equity_indices
     name: Equities
     domain: markets
-    status: planned
+    status: implemented
     homepage: https://stooq.com/
     description: Índices bursátiles principales.
-    notes: Stooq sirve CSV sin clave; falta decidir la cesta de índices.
 
   - key: treasury_yields
     name: Treasury
     domain: markets
-    status: planned
+    status: implemented
     homepage: https://home.treasury.gov/interest-rates-data-csv-archive
     description: Curva de tipos del Tesoro estadounidense.
 
   - key: worldbank_indicators
     name: WorldBank
     domain: macro
-    status: planned
+    status: implemented
     homepage: https://datahelpdesk.worldbank.org/knowledgebase/topics/125589
     description: Indicadores macroeconómicos por país.
 
   - key: polymarket
     name: Polymarket
     domain: markets
-    status: planned
+    status: implemented
     homepage: https://docs.polymarket.com/
     description: Probabilidades implícitas de mercados de predicción.
-    notes: >
-      Interesante como contraste: da una probabilidad de mercado con la que
-      comparar la del enjambre.
 
   - key: fred_macro
     name: FRED
@@ -265,7 +261,7 @@ sources:
   - key: edgar_insider
     name: EDGAR
     domain: markets
-    status: planned
+    status: implemented
     homepage: https://www.sec.gov/edgar/sec-api-documentation
     description: Operaciones de iniciados registradas en la SEC.
 
@@ -286,21 +282,21 @@ sources:
   - key: ofac_sanctions
     name: OFAC
     domain: sanctions
-    status: planned
+    status: implemented
     homepage: https://sanctionslist.ofac.treas.gov/Home/SdnList
     description: Lista de personas y entidades sancionadas por Estados Unidos.
 
   - key: eu_sanctions
     name: EU-Sanctions
     domain: sanctions
-    status: planned
+    status: implemented
     homepage: https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions
     description: Lista consolidada de sanciones financieras de la Unión Europea.
 
   - key: un_sanctions
     name: UN-Sanctions
     domain: sanctions
-    status: planned
+    status: implemented
     homepage: https://scsanctions.un.org/
     description: Lista consolidada del Consejo de Seguridad de Naciones Unidas.
 
@@ -315,7 +311,7 @@ sources:
   - key: ucdp
     name: UCDP
     domain: conflict
-    status: planned
+    status: implemented
     homepage: https://ucdp.uu.se/apidocs/
     description: Base de datos de conflictos de la Universidad de Uppsala.
 
@@ -332,14 +328,15 @@ sources:
   - key: nvd_cve
     name: NVD
     domain: cyber
-    status: planned
+    status: implemented
     homepage: https://nvd.nist.gov/developers/vulnerabilities
     description: Vulnerabilidades publicadas con su puntuación CVSS.
+
 
   - key: ioda_outages
     name: IODA
     domain: infrastructure
-    status: planned
+    status: implemented
     homepage: https://ioda.inetintel.cc.gatech.edu/
     description: Detección de cortes de conectividad a internet por país.
 
@@ -354,7 +351,7 @@ sources:
   - key: hacker_news
     name: HackerNews
     domain: technology
-    status: planned
+    status: implemented
     homepage: https://hn.algolia.com/api
     description: Señal temprana de incidentes técnicos y tecnología emergente.
 
@@ -364,14 +361,14 @@ sources:
   - key: who_outbreaks
     name: WHO
     domain: health
-    status: planned
+    status: implemented
     homepage: https://www.who.int/emergencies/disease-outbreak-news
     description: Noticias oficiales sobre brotes de enfermedades.
 
   - key: unhcr_displacement
     name: UNHCR
     domain: humanitarian
-    status: planned
+    status: implemented
     homepage: https://api.unhcr.org/docs/
     description: Cifras de desplazamiento forzoso y refugiados.
 
@@ -385,7 +382,7 @@ sources:
   - key: cdc_wastewater
     name: CDC-Wastewater
     domain: health
-    status: planned
+    status: implemented
     homepage: https://data.cdc.gov/
     description: Vigilancia de patógenos en aguas residuales.
 
@@ -403,7 +400,7 @@ sources:
   - key: flight_tracking
     name: Flights
     domain: logistics
-    status: planned
+    status: implemented
     homepage: https://openskynetwork.github.io/opensky-api/
     description: Tráfico aéreo, cierres de espacio aéreo y desvíos.
 
