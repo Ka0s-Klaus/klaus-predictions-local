@@ -235,6 +235,7 @@ async def predict_stream(body: PredictRequest, state: State) -> StreamingRespons
             result["meets_threshold"] = result["confidence"] >= umbral
             result["threshold"] = umbral
             result["timestamp"] = utcnow().isoformat()
+            await emit_progress("completed", {"latency_ms": result["latency_ms"]})
             await emit_progress("result", result)
         except Exception as exc:
             logger.exception("Error en predicción streaming")
@@ -244,14 +245,20 @@ async def predict_stream(body: PredictRequest, state: State) -> StreamingRespons
 
     async def event_generator() -> Any:
         """Generador de eventos SSE."""
+        import asyncio
+
         task = asyncio.create_task(run_prediction())
 
         try:
             while True:
-                event = await events_queue.get()
-                if event is None:
-                    break
-                yield event
+                try:
+                    event = await asyncio.wait_for(events_queue.get(), timeout=1.0)
+                    if event is None:
+                        break
+                    yield event
+                except asyncio.TimeoutError:
+                    # Heartbeat: comentario SSE para mantener conexión viva
+                    yield ": heartbeat\n"
         finally:
             await task
 
