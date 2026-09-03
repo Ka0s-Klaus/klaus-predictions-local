@@ -14,7 +14,7 @@ class USGSVolcano(FeedSource):
     name: ClassVar[str] = "USGS-Volcano"
     domain: ClassVar[str] = "disasters"
     event_type: ClassVar[str] = "volcano_alert"
-    endpoint: ClassVar[str] = "https://volcanoes.usgs.gov/vsc/api/volcanoApi/activity"
+    endpoint: ClassVar[str] = "https://volcanoes.usgs.gov/vsc/api/volcanoApi/elevated"
 
     def parse(self, payload: Any) -> list[NormalizedEvent]:
         """Extrae volcanes activos de la API USGS."""

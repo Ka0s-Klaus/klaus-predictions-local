@@ -9,8 +9,10 @@ from __future__ import annotations
 
 from typing import Any, ClassVar
 
+import aiohttp
+
 from engine.feeds.normalizer import NormalizedEvent, clamp
-from engine.feeds.sources.base import FeedSource
+from engine.feeds.sources.base import FeedError, FeedSource, USER_AGENT
 
 WATCH_POINTS = [
     {"lat": 35.6762, "lon": 139.6503, "name": "Tokio"},  # Sísmico + tifones
@@ -29,35 +31,62 @@ class OpenMeteoWeather(FeedSource):
     event_type: ClassVar[str] = "weather_anomaly"
     endpoint: ClassVar[str] = "https://api.open-meteo.com/v1/forecast"
 
+    async def fetch(self, session: aiohttp.ClientSession) -> list[NormalizedEvent]:
+        """Construye URL con múltiples coordenadas y descarga datos."""
+        # Construir parámetros con coordenadas de todos los puntos de vigilancia
+        lats = ",".join(str(p["lat"]) for p in WATCH_POINTS)
+        lons = ",".join(str(p["lon"]) for p in WATCH_POINTS)
+
+        url = f"{self.endpoint}?latitude={lats}&longitude={lons}&hourly=temperature_2m,precipitation"
+
+        headers = {"User-Agent": USER_AGENT, **self.headers}
+        try:
+            async with session.get(url, headers=headers, timeout=aiohttp.ClientTimeout(total=30)) as response:
+                if response.status != 200:
+                    raise FeedError(f"{self.name}: HTTP {response.status}")
+
+                import json
+                raw = await response.text()
+                payload = json.loads(raw)
+
+                if len(raw) > self.max_bytes:
+                    raise FeedError(f"{self.name}: response too large")
+
+                return self.parse(payload)
+        except aiohttp.ClientError as exc:
+            raise FeedError(f"{self.name}: network error") from exc
+
     def parse(self, payload: Any) -> list[NormalizedEvent]:
-        """El payload contiene arrays de `hourly` con índices temporales.
+        """Extrae anomalías meteorológicas. El payload es un dict con arrays de `hourly`.
 
         Busca desviaciones del promedio histórico en temperatura y lluvia.
         """
+        if not isinstance(payload, dict):
+            return []
+
         events = []
 
-        # Open-Meteo devuelve los puntos solicitados en orden
+        # Obtener datos de hourly (debería ser un dict con arrays)
+        hourly_data = payload.get("hourly", {})
+        if not isinstance(hourly_data, dict):
+            return []
+
+        temps = hourly_data.get("temperature_2m", [])
+        rains = hourly_data.get("precipitation", [])
+
+        if not isinstance(temps, list) or not isinstance(rains, list):
+            return []
+
+        # Para cada punto de vigilancia (mismo orden que en la solicitud)
         for i, point in enumerate(WATCH_POINTS):
-            if i >= len(payload.get("hourly", [])):
+            # Calcular cuántas mediciones hay por punto
+            # Open-Meteo devuelve todos los datos en un solo array, así que necesitamos inferir el intervalo
+            if not temps or not rains:
                 continue
 
-            is_list = isinstance(payload.get("hourly"), list)
-            hourly = payload.get("hourly", [{}])[i] if is_list else {}
-
-            # Fallback si devuelve dict en lugar de lista
-            if isinstance(hourly, dict):
-                temps = hourly.get("temperature_2m", [])
-                rain = hourly.get("precipitation", [])
-            else:
-                temps = []
-                rain = []
-
-            if not temps or not rain:
-                continue
-
-            # Último valor disponible (o promedio de últimas 6h)
-            recent_temps = [t for t in temps[-6:] if t is not None]
-            recent_rain = [r for r in rain[-6:] if r is not None]
+            # Tomar los últimos 6 valores de temperatura y lluvia (últimas 6 horas aproximadamente)
+            recent_temps = [t for t in temps[-6:] if t is not None and isinstance(t, (int, float))]
+            recent_rain = [r for r in rains[-6:] if r is not None and isinstance(r, (int, float))]
 
             if not recent_temps or not recent_rain:
                 continue

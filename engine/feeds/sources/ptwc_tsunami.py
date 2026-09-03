@@ -17,7 +17,7 @@ class PTWCTsunami(FeedSource):
     name: ClassVar[str] = "PTWC"
     domain: ClassVar[str] = "disasters"
     event_type: ClassVar[str] = "tsunami_alert"
-    endpoint: ClassVar[str] = "https://www.tsunami.gov/events/xml/PHEBEventFeed.xml"
+    endpoint: ClassVar[str] = "https://www.tsunami.gov/events/xml/PHEBCAP.xml"
 
     async def fetch(self, session: aiohttp.ClientSession) -> list[NormalizedEvent]:
         """Descarga e interpreta XML. Lanza `FeedError` si algo va mal."""

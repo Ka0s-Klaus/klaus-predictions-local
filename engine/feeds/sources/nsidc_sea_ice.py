@@ -20,7 +20,7 @@ class NSIDCSeaIce(FeedSource):
     name: ClassVar[str] = "NSIDC"
     domain: ClassVar[str] = "climate"
     event_type: ClassVar[str] = "sea_ice_extent"
-    endpoint: ClassVar[str] = "https://nsidc.org/api/seaice_index/data/monthly?format=csv"
+    endpoint: ClassVar[str] = "https://noaadata.apps.nsidc.org/NOAA/G02135/north/monthly/data/N_seaice_extent_monthly_v4.0.csv"
 
     async def fetch(self, session: aiohttp.ClientSession) -> list[NormalizedEvent]:
         """Fetch CSV data and parse."""

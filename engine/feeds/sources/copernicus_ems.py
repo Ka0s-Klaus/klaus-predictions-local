@@ -14,18 +14,15 @@ class CopernicusEMS(FeedSource):
     name: ClassVar[str] = "Copernicus-EMS"
     domain: ClassVar[str] = "disasters"
     event_type: ClassVar[str] = "emergency_response"
-    endpoint: ClassVar[str] = "https://emergency.copernicus.eu/mapping/activations-rapid/feed"
+    endpoint: ClassVar[str] = "https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations-info/"
 
     def parse(self, payload: Any) -> list[NormalizedEvent]:
-        """Extrae activaciones del feed RSS de Copernicus EMS."""
-        import xml.etree.ElementTree as ET
+        """Extrae activaciones del API JSON de Copernicus EMS Rapid Mapping."""
+        if not isinstance(payload, dict):
+            return []
 
-        if isinstance(payload, str):
-            try:
-                root = ET.fromstring(payload)
-            except ET.ParseError:
-                return []
-        else:
+        activations = payload.get("activations", [])
+        if not isinstance(activations, list):
             return []
 
         events = []
@@ -39,39 +36,50 @@ class CopernicusEMS(FeedSource):
             "volcano": 0.85,
         }
 
-        for item in root.findall(".//item"):
-            title = (item.findtext("title") or "").strip()
-            if not title:
+        for activation in activations:
+            if not isinstance(activation, dict):
                 continue
 
-            description = (item.findtext("description") or "").strip()
-            link = (item.findtext("link") or "").strip()
-            pub_date = item.findtext("pubDate")
+            activation_code = activation.get("activationCode", "").strip()
+            activation_name = activation.get("activationName", "").strip()
 
+            if not activation_name:
+                continue
+
+            # Extraer fecha de activación
+            event_time_str = activation.get("activationTime")
+            event_time = parse_timestamp(event_time_str) if event_time_str else None
+
+            # Determinar severidad basada en el nombre del evento
+            category = activation.get("category", "").lower()
             salience = 0.6
             for disaster_type, default_salience in disaster_severity_map.items():
-                if disaster_type.lower() in title.lower():
+                if disaster_type.lower() in activation_name.lower() or disaster_type.lower() in category:
                     salience = default_salience
                     break
 
-            event_time = parse_timestamp(pub_date) if pub_date else None
+            # URL de la activación
+            url = f"https://mapping.emergency.copernicus.eu/activations/{activation_code}/" if activation_code else None
 
-            external_id = f"copernicus_{title.lower().replace(' ', '_')[:30]}"
+            external_id = f"copernicus_{activation_code.lower()}" if activation_code else f"copernicus_{activation_name.lower().replace(' ', '_')[:30]}"
+
+            description = activation.get("description", "")
+            if not description:
+                description = f"Category: {category}" if category else "Activación de respuesta de emergencia"
 
             events.append(
                 NormalizedEvent(
                     source=self.name,
                     event_type=self.event_type,
-                    title=title,
-                    description=description[:300] if description else "Activación de respuesta de emergencia",
-                    url=link if link else None,
+                    title=activation_name,
+                    description=description[:300],
+                    url=url,
                     salience=clamp(salience),
                     event_time=event_time,
                     external_id=external_id,
                     raw={
-                        "title": title,
-                        "link": link,
-                        "pub_date": pub_date,
+                        "activation_code": activation_code,
+                        "category": category,
                     },
                 )
             )

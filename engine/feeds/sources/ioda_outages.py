@@ -14,7 +14,7 @@ class IODAOutages(FeedSource):
     name: ClassVar[str] = "IODA"
     domain: ClassVar[str] = "infrastructure"
     event_type: ClassVar[str] = "outage"
-    endpoint: ClassVar[str] = "https://api.ioda.inetintel.cc.gatech.edu/v2/outages/"
+    endpoint: ClassVar[str] = "https://api.ioda.inetintel.cc.gatech.edu/v2/outages?status=ongoing"
 
     def parse(self, payload: Any) -> list[NormalizedEvent]:
         """Extrae eventos de corte de la API IODA."""
