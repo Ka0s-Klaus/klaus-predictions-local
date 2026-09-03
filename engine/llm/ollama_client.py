@@ -66,7 +66,12 @@ class OllamaClient:
 
     async def _get_session(self) -> aiohttp.ClientSession:
         if self._session is None or self._session.closed:
-            timeout = aiohttp.ClientTimeout(total=self.config.inference_timeout)
+            # Si inference_timeout es None o 0, sin timeout (esperar indefinidamente)
+            timeout = (
+                aiohttp.ClientTimeout(total=None)
+                if self.config.inference_timeout is None or self.config.inference_timeout == 0
+                else aiohttp.ClientTimeout(total=self.config.inference_timeout)
+            )
             self._session = aiohttp.ClientSession(timeout=timeout)
             self._owns_session = True
         return self._session

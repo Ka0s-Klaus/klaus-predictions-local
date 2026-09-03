@@ -7,6 +7,7 @@ from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.concurrency import run_in_threadpool
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 
@@ -188,6 +189,73 @@ async def predict(body: PredictRequest, state: State) -> dict[str, Any]:
     result["threshold"] = umbral
     result["timestamp"] = utcnow().isoformat()
     return result
+
+
+@protected.post("/predict/stream", summary="Predicción con progreso en vivo (SSE)")
+async def predict_stream(body: PredictRequest, state: State) -> StreamingResponse:
+    """Streaming de predicción con eventos de progreso en tiempo real.
+
+    Emite eventos Server-Sent Events (SSE):
+    - "started": al comenzar la predicción
+    - "completed": al terminar (contiene el resultado completo)
+    """
+    import asyncio
+    import json
+
+    if body.horizon not in state.predictor.horizons:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"horizonte '{body.horizon}' no soportado; "
+                f"disponibles: {', '.join(state.predictor.horizons)}"
+            ),
+        )
+
+    events_queue: asyncio.Queue[str] = asyncio.Queue()
+
+    async def emit_progress(status: str, data: dict[str, Any]) -> None:
+        """Emite un evento SSE a la cola."""
+        event = f"event: {status}\ndata: {json.dumps(data)}\n\n"
+        await events_queue.put(event)
+
+    async def run_prediction() -> None:
+        """Ejecuta la predicción en background y emite eventos."""
+        try:
+            result = await state.predictor.predict(
+                body.query,
+                body.horizon,
+                sector=body.sector,
+                on_progress=emit_progress,
+            )
+            umbral = (
+                body.min_confidence
+                if body.min_confidence is not None
+                else state.predictor.confidence_min
+            )
+            result["meets_threshold"] = result["confidence"] >= umbral
+            result["threshold"] = umbral
+            result["timestamp"] = utcnow().isoformat()
+            await emit_progress("result", result)
+        except Exception as exc:
+            logger.exception("Error en predicción streaming")
+            await emit_progress("error", {"message": str(exc)})
+        finally:
+            await events_queue.put(None)  # Señal de fin
+
+    async def event_generator() -> Any:
+        """Generador de eventos SSE."""
+        task = asyncio.create_task(run_prediction())
+
+        try:
+            while True:
+                event = await events_queue.get()
+                if event is None:
+                    break
+                yield event
+        finally:
+            await task
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 
 @protected.post("/chat", summary="Conversación con un solo agente")

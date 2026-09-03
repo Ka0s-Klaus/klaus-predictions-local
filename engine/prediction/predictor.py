@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from collections.abc import Callable, Sequence
@@ -21,6 +22,9 @@ DEFAULT_HORIZONS = ("24h", "week", "month", "year")
 # Proveedor de contexto: devuelve los eventos recientes que verá el enjambre.
 # En esta fase se inyecta desde fuera; la fase de feeds enchufará el ingestor.
 ContextProvider = Callable[[str, int], Sequence[dict[str, Any]]]
+
+# Callback de progreso: (status: str, progress: dict) para streaming
+ProgressCallback = Callable[[str, dict[str, Any]], None]
 
 
 class Predictor:
@@ -53,6 +57,7 @@ class Predictor:
         *,
         sector: str | None = None,
         persist: bool = True,
+        on_progress: ProgressCallback | None = None,
     ) -> dict[str, Any]:
         """Somete la pregunta al enjambre y guarda el resultado."""
         if horizon not in self.horizons:
@@ -61,9 +66,18 @@ class Predictor:
             )
 
         events = self._context(query)
+
+        # Emite inicio
+        if on_progress:
+            on_progress("started", {"agents": len(self.swarm.agents)})
+
         started = time.perf_counter()
         consensus = await self.swarm.run(query, {"events": events}, horizon=horizon)
         latency_ms = int((time.perf_counter() - started) * 1000)
+
+        # Emite completado
+        if on_progress:
+            on_progress("completed", {"latency_ms": latency_ms})
 
         result: dict[str, Any] = {
             "prediction_id": None,

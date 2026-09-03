@@ -42,7 +42,7 @@ class OllamaConfig(BaseSettings):
     top_p: float = Field(0.95, alias="LLM_TOP_P", ge=0.0, le=1.0)
     max_tokens: int = Field(384, alias="LLM_MAX_TOKENS", gt=0)
     context_length: int = Field(4096, alias="LLM_CONTEXT_LENGTH", gt=0)
-    inference_timeout: int = Field(20, alias="LLM_INFERENCE_TIMEOUT", gt=0)
+    inference_timeout: int | None = Field(20, alias="LLM_INFERENCE_TIMEOUT")
 
 
 class GPUConfig(BaseSettings):

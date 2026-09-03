@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
-import { api } from '../utils/api.js'
+import { api, predictStream } from '../utils/api.js'
 
 const HORIZONS = ['24h', 'week', 'month', 'year']
 
@@ -18,19 +18,58 @@ export default function Predictions({ threshold = 0.65 }) {
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
   const [tabla, setTabla] = useState(false)
+  const [progress, setProgress] = useState(null)
+  const cancelRef = useRef(null)
 
   async function submit(event) {
     event.preventDefault()
     setPending(true)
     setError(null)
-    try {
-      setResult(await api.predict(query, horizon))
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setPending(false)
-    }
+    setResult(null)
+    setProgress({ agents: 0 })
+
+    cancelRef.current = predictStream(
+      query,
+      horizon,
+      (event) => {
+        if (event.event === 'started') {
+          setProgress({ agents: event.data.agents, status: 'Iniciando…' })
+        } else if (event.event === 'completed') {
+          setProgress((prev) => ({ ...prev, status: 'Generando respuesta…' }))
+        } else if (event.event === 'result') {
+          setResult(event.data)
+          setProgress(null)
+          setPending(false)
+        } else if (event.event === 'error') {
+          setError(event.data.message || 'Error desconocido')
+          setProgress(null)
+          setPending(false)
+        }
+      },
+      (err) => {
+        setError(err.message)
+        setProgress(null)
+        setPending(false)
+      }
+    )
   }
+
+  function cancelPrediction() {
+    if (cancelRef.current) {
+      cancelRef.current()
+      cancelRef.current = null
+    }
+    setPending(false)
+    setProgress(null)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (cancelRef.current) {
+        cancelRef.current()
+      }
+    }
+  }, [])
 
   const votes = result ? Object.entries(result.agent_votes).sort((a, b) => b[1] - a[1]) : []
 
@@ -59,7 +98,7 @@ export default function Predictions({ threshold = 0.65 }) {
           maxLength={2000}
         />
         <div className="row">
-          <select value={horizon} onChange={(e) => setHorizon(e.target.value)}>
+          <select value={horizon} onChange={(e) => setHorizon(e.target.value)} disabled={pending}>
             {HORIZONS.map((h) => (
               <option key={h} value={h}>
                 {h}
@@ -69,10 +108,61 @@ export default function Predictions({ threshold = 0.65 }) {
           <button type="submit" disabled={pending}>
             {pending ? 'Razonando…' : 'Predecir'}
           </button>
+          {pending && (
+            <button type="button" onClick={cancelPrediction} className="secondary">
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
 
-      {pending && (
+      {progress && (
+        <div className="notice" style={{ backgroundColor: '#f0f4ff', padding: '16px', borderRadius: '4px' }}>
+          <div style={{ marginBottom: '12px', fontWeight: 'bold' }}>
+            🔄 {progress.status || `Procesando ${progress.agents} agentes…`}
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: '8px',
+            }}
+          >
+            {Array.from({ length: progress.agents }).map((_, i) => (
+              <div key={i} style={{ textAlign: 'center', fontSize: '12px' }}>
+                <div
+                  style={{
+                    width: '100%',
+                    height: '4px',
+                    backgroundColor: '#e0e0e0',
+                    borderRadius: '2px',
+                    overflow: 'hidden',
+                    marginBottom: '4px',
+                  }}
+                >
+                  <div
+                    style={{
+                      height: '100%',
+                      backgroundColor: '#6366f1',
+                      animation: 'pulse 1.5s ease-in-out infinite',
+                      width: '100%',
+                    }}
+                  />
+                </div>
+                <span>Agente {i + 1}</span>
+              </div>
+            ))}
+          </div>
+          <style>{`
+            @keyframes pulse {
+              0%, 100% { opacity: 0.3; }
+              50% { opacity: 1; }
+            }
+          `}</style>
+        </div>
+      )}
+
+      {pending && !progress && (
         <div className="notice">
           Con un modelo de 7B en CPU esto tarda <strong>minutos</strong>, no segundos. Ver
           docs/HARDWARE.md.
