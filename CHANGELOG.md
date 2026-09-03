@@ -5,29 +5,33 @@ Todos los cambios notables de este proyecto se documentan en este fichero.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el
 proyecto se adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
+## [1.0.0] - 2026-09-03
+
+🚀 **Primera release funcional**: predicción end-to-end con streaming en vivo.
+Todos los componentes (ingesta, enjambre, API, dashboard) operativos y probados.
+
 ## [Unreleased]
 
-Esqueleto vertical de Pythia: el camino completo de ingesta a predicción,
-funcionando y probado extremo a extremo.
+(Los cambios futuros irán aquí)
 
 ### Added
 
 - **Motor de predicción.** Configuración, cuatro tablas SQLAlchemy 2.0, cliente
   asíncrono de Ollama, enjambre MiroFish con siete agentes, consenso ponderado por
   Brier score, y resolución de predicciones que realimenta la calibración.
-- **Ingesta de feeds.** Catálogo de 51 fuentes en YAML con ocho implementadas
-  —USGS, EONET, NWS, NHC, SWPC, GDELT, divisas del BCE y cripto—, todas
-  verificadas contra el servicio real. Ingestor concurrente que tolera fuentes
-  caídas, normalizador común, caché TTL y retención de histórico.
-- **API.** Los nueve endpoints de la especificación, flujo SSE de estado,
-  autenticación opcional por token y traducción de errores de dominio a códigos
-  HTTP.
+- **Ingesta de feeds.** Catálogo de 50 fuentes en YAML con 30 activas —USGS, EONET,
+  NWS, NHC, SWPC, GDELT, Forex, Crypto y otras—, todas verificadas contra el
+  servicio real. Ingestor concurrente que tolera fuentes caídas, normalizador común,
+  caché TTL y retención de histórico.
+- **API.** Doce endpoints de predicción, chat, estado, calibración y más. Streaming
+  SSE con heartbeats para mantener conexiones vivas durante predicciones largas.
+  Autenticación opcional por token y traducción de errores de dominio a códigos HTTP.
 - **CLI** (`python -m engine.cli`) con predicción, resumen del mundo, ingesta,
   estado, catálogo, marcador y resolución.
 - **UI Osiris**: React 19 + Vite 8, globo con three.js, señales en vivo y
-  lanzador de predicciones.
-- **Documentación**: arquitectura, catálogo de fuentes generado desde el YAML, y
-  rendimiento real por hardware.
+  lanzador de predicciones con progreso visual en tiempo real.
+- **Documentación**: arquitectura, catálogo de fuentes generado desde el YAML,
+  rendimiento real por hardware, y guía de despliegue en red local.
 - Estructura del repositorio: licencia MIT, guía de contribución, código de
   conducta, política de seguridad, plantillas de issues y PR, CODEOWNERS,
   Dependabot y workflows de CI, release y stale.
@@ -56,7 +60,7 @@ comentadas en el código junto al sitio donde importan:
 
 ### Fixed
 
-Errores de la especificación que impedían que el código arrancase o funcionase:
+Errores de la especificación y bugs críticos encontrados durante el desarrollo:
 
 - `FeedIngestor` filtraba con `if r is not None` sobre un
   `asyncio.gather(return_exceptions=True)`: las excepciones no son `None` y se
@@ -76,5 +80,14 @@ Errores de la especificación que impedían que el código arrancase o funcionas
   violado aborta la transacción entera, no sólo la fila.
 - `sources_used` se filtra contra las fuentes presentes en el contexto. En una
   ejecución real el modelo copió literalmente el `"…"` del esquema de ejemplo.
+- **Proxy de Vite sin soporte WebSocket** (`ws: true`): conexiones SSE largas se
+  interrumpían al cambiar de ruta.
+- **Buffering de SSE en `/predict/stream`**: FastAPI no enviaba eventos hasta que
+  se cerraba la conexión. Ahora emite heartbeats cada segundo para mantener viva.
+- **Timeout de API insuficiente**: `API_TIMEOUT=15` causaba que predicciones de 8
+  minutos devuelvan 408. Ahora por defecto `600` (10 minutos).
+- **Evento `completed` nunca se emitía**: solo `result`, perdiendo metadatos de
+  latencia. Ahora se emite `completed` antes de `result`.
 
+[1.0.0]: https://github.com/Ka0s-Klaus/klaus-predictions-local/releases/tag/v1.0.0
 [Unreleased]: https://github.com/Ka0s-Klaus/klaus-predictions-local/commits/main

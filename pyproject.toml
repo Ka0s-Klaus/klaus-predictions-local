@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "klaus-predictions-local"
-version = "0.1.0"
+version = "1.0.0"
 description = "Oráculo de predicción local-first: feeds públicos, enjambre de agentes y LLM en tu propia máquina"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -12,7 +12,7 @@ license = "MIT"
 authors = [{ name = "Ka0s-Klaus" }]
 keywords = ["predictions", "local-first", "llm", "ollama", "forecasting"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",

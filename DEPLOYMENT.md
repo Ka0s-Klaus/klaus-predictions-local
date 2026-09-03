@@ -43,15 +43,21 @@ En el Lenovo, en la carpeta del proyecto:
 cp .env.example .env
 ```
 
-El archivo `.env.example` ya contiene los valores para red distribuida:
+El archivo `.env.example` usa **localhost por defecto** para desarrollo. Si Ollama está en otra máquina de la red, personaliza:
+
 ```ini
+# Si Ollama está en otra máquina:
 LLM_BASE_URL=http://192.168.1.126:11434/api
+
+# Si accedes desde otra máquina en la red:
 CORS_ORIGINS=http://192.168.1.108:3000,http://192.168.1.108:8088
+
 API_HOST=0.0.0.0
 FEEDS_UPDATE_INTERVAL=900
+API_TIMEOUT=600     # Crítico: predicciones tardan ~8 min en CPU
 ```
 
-Verifica que estos valores coinciden con tu setup. Si no, edita `.env`:
+Edita `.env` según tu setup:
 
 ```bash
 nano .env
@@ -150,8 +156,13 @@ curl http://192.168.1.108:8088/agent/events?limit=10
 # Ver estado del mundo
 curl http://192.168.1.108:8088/agent/view
 
-# Hacer una predicción (tarda 8-10 minutos en CPU)
+# Hacer una predicción bloqueante (tarda 8-10 minutos en CPU)
 curl -X POST http://192.168.1.108:8088/predict \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"¿Riesgo de inundación en próximas 24h?","horizon":"24h"}'
+
+# Predicción con streaming en vivo (con heartbeats cada segundo)
+curl -X POST http://192.168.1.108:8088/predict/stream \
   -H 'Content-Type: application/json' \
   -d '{"query":"¿Riesgo de inundación en próximas 24h?","horizon":"24h"}'
 ```

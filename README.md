@@ -42,17 +42,17 @@ curl -s -X POST localhost:8088/predict \
 
 ## Estado
 
-🚧 **Esqueleto vertical funcionando.** El camino completo —ingesta → contexto →
-enjambre → consenso → persistencia → API → UI— está operativo y probado. Lo que
-falta es amplitud, no profundidad: 8 de las 51 fuentes del catálogo están
-implementadas.
+✅ **v1.0.0 — Primera release funcional.** El camino completo —ingesta → contexto →
+enjambre → consenso → persistencia → API → UI— está operativo end-to-end. Predicciones
+con streaming en vivo desde el dashboard. Lo que falta es amplitud: fuentes e
+integraciones por añadir al catálogo.
 
 | | |
 | --- | --- |
-| Fuentes | 8 implementadas de 51 declaradas ([catálogo](docs/FEEDS.md)) |
+| Fuentes | 30 activas de 50 declaradas ([catálogo](docs/FEEDS.md)) |
 | Agentes | 7, con voto ponderado por Brier |
 | Horizontes | 24h · semana · mes · año |
-| Endpoints | 9 |
+| Endpoints | 12, con streaming SSE |
 | Tests | 178, sin red ni Ollama ni PostgreSQL |
 
 ## Instalación
@@ -86,14 +86,17 @@ pip install -e ".[embeddings]"   # sentence-transformers (arrastra torch, ~1 GB)
 
 ```text
 GET  /health              estado del servicio
+GET  /health/llm          ¿responde Ollama?
 GET  /agent/view          resumen del estado del mundo
 GET  /agent/events        eventos ingeridos, filtrables
-POST /predict             predicción del enjambre
+POST /predict             predicción del enjambre (bloqueante)
+POST /predict/stream      predicción con progreso en vivo (SSE)
 POST /chat                conversación con un solo agente
 POST /whatif              escenario hipotético (no se persiste)
 GET  /predictions         histórico de predicciones
 GET  /scorecard           calibración de cada agente
 GET  /state/stream        flujo de estado en vivo (SSE)
+POST /feeds/refresh       fuerza una ronda de ingesta
 ```
 
 Documentación interactiva en `http://localhost:8088/docs`.
@@ -155,7 +158,8 @@ variable. Las que más importan:
 | Variable | Por defecto | Para qué |
 | -------- | ----------- | -------- |
 | `LLM_MODEL` | `mistral:7b-instruct-q4_K_M` | Modelo de Ollama |
-| `LLM_INFERENCE_TIMEOUT` | `120` | Súbelo en máquinas lentas |
+| `LLM_INFERENCE_TIMEOUT` | `20` | Segundos máximo; recomendado `0` (sin límite) |
+| `API_TIMEOUT` | `600` | Timeout de respuesta HTTP; crítico para `/predict/stream` |
 | `DATABASE_URL` | `sqlite:///./pythia.db` | SQLite o PostgreSQL |
 | `MIROFISH_AGENTS` | `7` | Menos agentes = prompt más corto |
 | `FEEDS_UPDATE_INTERVAL` | `900` | Segundos entre rondas de ingesta |

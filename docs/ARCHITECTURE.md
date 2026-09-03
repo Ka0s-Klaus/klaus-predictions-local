@@ -39,7 +39,7 @@ El bucle se cierra: los agentes que aciertan pesan más la próxima vez.
 | `engine/feeds/` | Catálogo, registro, ingesta, normalización y caché |
 | `engine/prediction/` | Brier, calibración, persistencia y resolución |
 | `engine/embedding/` | Embeddings opcionales, con degradación a CPU |
-| `engine/api/` | Los nueve endpoints, SSE, middleware y autenticación |
+| `engine/api/` | Doce endpoints, SSE con heartbeats, middleware y autenticación |
 | `ui/osiris/` | Interfaz React: globo, señales y predicciones |
 
 ## Las tres decisiones que definen el diseño
@@ -94,15 +94,11 @@ El registro valida el cruce al cargar: una entrada marcada como implementada sin
 clase detrás —o una clase que no figura en el catálogo— es un error de arranque, no
 un fallo silencioso a mitad de la ingesta.
 
-## Concurrencia
+## Streaming SSE
 
-SQLAlchemy en modo **síncrono**, a propósito: menos piezas móviles y se comporta
-igual con SQLite y con PostgreSQL. Las rutas asíncronas que tocan la base de datos
-delegan en un hilo con `run_in_threadpool`, así que no bloquean el bucle de
-eventos.
+El endpoint `/predict/stream` mantiene la conexión abierta mientras procesa. Como una predicción tarda ~8 minutos, se emiten **heartbeats cada segundo** (comentarios SSE: `: heartbeat\n`) para evitar que FastAPI o Vite buffreen la respuesta hasta el final.
 
-La ingesta sí es asíncrona de principio a fin (`aiohttp` + semáforo), que es donde
-la concurrencia aporta: ocho descargas HTTP en paralelo.
+El cliente (navegador) recibe eventos: `started` (7 agentes listos), `completed` (Ollama terminó, N segundos), `result` (JSON completo), `error` (si ocurre fallo). El dashboard anima una barra de progreso mientras llegan heartbeats, y muestra el resultado en cuanto termina.
 
 ## Tolerancia a fallos
 
