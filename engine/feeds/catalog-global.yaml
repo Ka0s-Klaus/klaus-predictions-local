@@ -1999,4 +1999,38 @@ sources:
   notes: 'Global source v2.0 | Score: 588 | Profile: critical'
   requires_key: false
   status: implemented
+- description: NOAA API - GLOBAL | weather
+  domain: weather
+  homepage: https://www.weather.gov/documentation/services-web-api
+  key: global_global-noaaapi-00061
+  metadata:
+    access_type: api
+    country: GLOBAL
+    parser_type: json
+    quality_tier: excellent
+    reliability_score: 92.4
+    source_id: global-noaaapi-00061
+    topic: weather
+    update_freq: realtime
+  name: NOAA API
+  notes: 'Global source v2.0 | Score: 92 | Profile: critical'
+  requires_key: false
+  status: implemented
+- description: OpenWeatherMap - GLOBAL | weather
+  domain: weather
+  homepage: https://openweathermap.org
+  key: global_global-openweathermap-00062
+  metadata:
+    access_type: api
+    country: GLOBAL
+    parser_type: json
+    quality_tier: excellent
+    reliability_score: 91.4
+    source_id: global-openweathermap-00062
+    topic: weather
+    update_freq: realtime
+  name: OpenWeatherMap
+  notes: 'Global source v2.0 | Score: 91 | Profile: critical'
+  requires_key: false
+  status: implemented
 version: 1

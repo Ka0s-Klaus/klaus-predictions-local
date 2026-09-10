@@ -5,6 +5,7 @@ de `catalog.yaml` tienen código detrás.
 """
 
 from engine.feeds.sources.base import FeedError, FeedSource
+from engine.feeds.sources.generic_web import GenericWebSource
 from engine.feeds.sources.ai_regulation_tracker import AIRegulationTracker
 from engine.feeds.sources.ai_security_vulnerabilities import AISafetyVulnerabilities
 from engine.feeds.sources.anthropic_research import AnthropicResearch
