@@ -13,18 +13,23 @@ Modos soportados:
 
 from __future__ import annotations
 
+import asyncio
+import json
 import logging
+import re
 from typing import Any
+from xml.etree import ElementTree as ET
 
 import aiohttp
 
+from engine.feeds.normalizer import NormalizedEvent
 from engine.feeds.sources import FeedError, FeedSource
 
 logger = logging.getLogger(__name__)
 
 
 class GenericWebSource(FeedSource):
-    """Fuente genérica para cualquier endpoint web público."""
+    """Fuente genérica parametrizada para fuentes globales."""
 
     def __init__(
         self,
@@ -41,96 +46,106 @@ class GenericWebSource(FeedSource):
     ):
         """
         Args:
-            source_id: ID único de la fuente (ej: es-aemet-00001)
+            source_id: ID único (ej: global-aemet-00001)
             name: Nombre legible (ej: AEMET)
-            url: URL del endpoint o homepage
+            url: Endpoint o homepage
             parser_type: "html", "json", "rss"
-            access_type: "web", "api", "rss", "data_portal", "dashboard"
-            country: Código ISO del país (ej: ES)
-            domain: Dominio Klaus (ej: weather, markets, cyber)
-            reliability_score: Score de confiabilidad 0-100
-            max_bytes: Tamaño máximo de descarga en bytes
+            access_type: "web", "api", "rss", etc.
+            country: Código ISO (ej: ES)
+            domain: Dominio Klaus
+            reliability_score: Score 0-100
+            max_bytes: Tamaño máximo descarga
         """
         super().__init__(max_bytes=max_bytes)
         self.source_id = source_id
-        self.name = name
+        self.name = name  # Atributo de instancia para compatibilidad
+        self.domain = domain  # Dominio para normalización
+        self.endpoint = url  # FeedSource.fetch() usa self.endpoint
         self.url = url
         self.parser_type = parser_type
         self.access_type = access_type
         self.country = country
-        self.domain = domain
         self.reliability_score = reliability_score
 
-    async def fetch(self, session: aiohttp.ClientSession) -> str | None:
-        """Descarga contenido del endpoint."""
+    def parse(self, payload: Any) -> list[NormalizedEvent]:
+        """
+        Convierte respuesta cruda en eventos normalizados.
+
+        Payload es un string con contenido HTML/JSON/XML.
+        """
+        if isinstance(payload, str):
+            content = payload
+        else:
+            return []
+
+        event = None
+        if self.parser_type == "html":
+            event = self._parse_html(content)
+        elif self.parser_type == "json":
+            event = self._parse_json(content)
+        elif self.parser_type == "rss":
+            event = self._parse_rss(content)
+        else:
+            logger.warning(f"{self.name}: parser_type desconocido: {self.parser_type}")
+            return []
+
+        if not event:
+            return []
+
+        # Convierte a NormalizedEvent
+        return [
+            NormalizedEvent(
+                source=self.name,
+                domain=self.domain,
+                title=event.get("title", f"Update from {self.name}"),
+                summary=event.get("description", ""),
+                url=event.get("url", self.url),
+                published=event.get("timestamp"),
+            )
+        ]
+
+    async def _request(
+        self, session: aiohttp.ClientSession, endpoint: str
+    ) -> str:
+        """Descarga contenido del endpoint (override del método base)."""
         try:
             async with session.get(
-                self.url,
+                endpoint,
                 timeout=aiohttp.ClientTimeout(total=20),
                 headers={
                     "User-Agent": "Klaus-Predictor/2.0 (+https://github.com/asantacana/klaus-predictions-local)",
                 },
             ) as response:
                 if response.status != 200:
-                    logger.warning(f"{self.name} ({self.country}): HTTP {response.status}")
-                    return None
+                    raise FeedError(f"{self.name}: HTTP {response.status}")
 
                 content = await response.read()
                 if len(content) > self.max_bytes:
-                    logger.warning(
-                        f"{self.name}: contenido {len(content)} bytes > {self.max_bytes} max"
+                    raise FeedError(
+                        f"{self.name}: contenido {len(content)} > {self.max_bytes} max"
                     )
-                    return None
 
                 return content.decode("utf-8", errors="ignore")
 
-        except asyncio.TimeoutError:
-            logger.warning(f"{self.name}: timeout")
-            raise FeedError(f"{self.name}: timeout después de 20s")
+        except asyncio.TimeoutError as e:
+            raise FeedError(f"{self.name}: timeout") from e
+        except FeedError:
+            raise
         except Exception as e:
-            logger.warning(f"{self.name}: {type(e).__name__}: {e}")
-            raise FeedError(f"{self.name}: {e}")
-
-    async def ingest(
-        self, session: aiohttp.ClientSession
-    ) -> dict[str, Any] | None:
-        """Ingesta y normaliza contenido."""
-        content = await self.fetch(session)
-        if content is None:
-            return None
-
-        if self.parser_type == "html":
-            return self._parse_html(content)
-        elif self.parser_type == "json":
-            return self._parse_json(content)
-        elif self.parser_type == "rss":
-            return self._parse_rss(content)
-        else:
-            logger.warning(f"{self.name}: parser_type desconocido: {self.parser_type}")
-            return None
+            raise FeedError(f"{self.name}: {type(e).__name__}: {e}") from e
 
     def _parse_html(self, content: str) -> dict[str, Any] | None:
-        """Extrae metadatos básicos de HTML (og:title, og:description)."""
-        import re
-
+        """Extrae metadatos de HTML."""
         data = {
-            "source": self.name,
-            "source_id": self.source_id,
+            "title": f"Update from {self.name}",
+            "description": f"Check {self.name} for latest updates",
             "url": self.url,
-            "country": self.country,
-            "domain": self.domain,
-            "title": "Update from " + self.name,
-            "description": f"Check {self.name} for latest updates from {self.country}",
-            "reliability": self.reliability_score,
-            "timestamp": None,
         }
 
-        # Intenta extraer og:title
         title_match = re.search(r'<meta property="og:title" content="([^"]+)"', content)
         if title_match:
             data["title"] = title_match.group(1)[:200]
 
-        # Intenta extraer og:description
         desc_match = re.search(
             r'<meta property="og:description" content="([^"]+)"', content
         )
@@ -140,62 +155,35 @@ class GenericWebSource(FeedSource):
         return data
 
     def _parse_json(self, content: str) -> dict[str, Any] | None:
-        """Parsea JSON genérico y extrae estructura."""
-        import json
-
+        """Parsea JSON genérico."""
         try:
             obj = json.loads(content)
+            data = {"title": self.name, "url": self.url}
 
-            # Estructura esperada (genérica)
-            data = {
-                "source": self.name,
-                "source_id": self.source_id,
-                "url": self.url,
-                "country": self.country,
-                "domain": self.domain,
-                "raw": obj,
-                "reliability": self.reliability_score,
-            }
-
-            # Si es array, toma el primer elemento
             if isinstance(obj, list) and len(obj) > 0:
                 obj = obj[0]
 
-            # Intenta extraer campos comunes
             if isinstance(obj, dict):
-                # Busca título
-                for key in ["title", "name", "headline", "subject"]:
+                for key in ["title", "name", "headline"]:
                     if key in obj:
                         data["title"] = str(obj[key])[:200]
                         break
 
-                # Busca descripción
-                for key in ["description", "summary", "text", "content", "body"]:
+                for key in ["description", "summary", "text"]:
                     if key in obj:
                         data["description"] = str(obj[key])[:400]
                         break
 
-                # Busca timestamp
-                for key in ["timestamp", "date", "published", "created_at", "updated_at"]:
-                    if key in obj:
-                        data["timestamp"] = obj[key]
-                        break
-
             return data
 
-        except json.JSONDecodeError as e:
-            logger.warning(f"{self.name}: JSON inválido: {e}")
+        except Exception as e:
+            logger.warning(f"{self.name}: JSON parse error: {e}")
             return None
 
     def _parse_rss(self, content: str) -> dict[str, Any] | None:
-        """Parsea RSS/Atom genérico."""
-        import re
-        from xml.etree import ElementTree as ET
-
+        """Parsea RSS/Atom."""
         try:
             root = ET.fromstring(content)
-
-            # Busca primer item/entry
             ns = {"atom": "http://www.w3.org/2005/Atom"}
             items = root.findall(".//item") or root.findall(".//atom:entry", ns)
 
@@ -203,41 +191,25 @@ class GenericWebSource(FeedSource):
                 return None
 
             item = items[0]
+            data = {"title": self.name, "url": self.url}
 
-            data = {
-                "source": self.name,
-                "source_id": self.source_id,
-                "url": self.url,
-                "country": self.country,
-                "domain": self.domain,
-                "reliability": self.reliability_score,
-            }
-
-            # Extrae título
             title_elem = item.find("title") or item.find("atom:title", ns)
             if title_elem is not None and title_elem.text:
                 data["title"] = title_elem.text[:200]
 
-            # Extrae descripción
-            desc_elem = item.find("description") or item.find(
-                "summary", ns
-            ) or item.find("content", ns)
+            desc_elem = (
+                item.find("description")
+                or item.find("summary", ns)
+                or item.find("content", ns)
+            )
             if desc_elem is not None and desc_elem.text:
                 data["description"] = desc_elem.text[:400]
 
-            # Extrae pubDate
-            pub_elem = item.find("pubDate") or item.find("published", ns)
-            if pub_elem is not None and pub_elem.text:
-                data["timestamp"] = pub_elem.text
-
             return data
 
-        except ET.ParseError as e:
-            logger.warning(f"{self.name}: XML inválido: {e}")
+        except Exception as e:
+            logger.warning(f"{self.name}: RSS parse error: {e}")
             return None
 
     def __repr__(self) -> str:
         return f"<GenericWeb {self.name:20s} ({self.country}) {self.domain}>"
-
-
-import asyncio
