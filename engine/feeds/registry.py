@@ -126,7 +126,12 @@ def build_sources(
 
     `keys` permite quedarse con un subconjunto; se ignoran en silencio las que
     aún no tienen implementación.
+    
+    Las fuentes globales (clave comienza con "global_") se instancian
+    usando GenericWebSource de forma parametrizada.
     """
+    from engine.feeds.sources.generic_web import GenericWebSource
+    
     selected = implemented_entries()
     if keys is not None:
         wanted = set(keys)
@@ -135,7 +140,28 @@ def build_sources(
             raise CatalogError(f"fuentes desconocidas: {', '.join(sorted(desconocidas))}")
         selected = [entry for entry in selected if entry.key in wanted]
 
-    return [IMPLEMENTATIONS[entry.key](max_bytes=max_bytes) for entry in selected]
+    sources = []
+    for entry in selected:
+        # Fuentes globales usan GenericWebSource parametrizado
+        if entry.key.startswith("global_"):
+            metadata = entry.metadata or {}
+            source = GenericWebSource(
+                source_id=metadata.get("source_id", entry.key),
+                name=entry.name,
+                url=entry.homepage,
+                parser_type=metadata.get("parser_type", "html"),
+                access_type=metadata.get("access_type", "web"),
+                country=metadata.get("country", "GLOBAL"),
+                domain=entry.domain,
+                reliability_score=metadata.get("reliability_score", 75.0),
+                max_bytes=max_bytes,
+            )
+            sources.append(source)
+        # Fuentes Klaus originales
+        else:
+            sources.append(IMPLEMENTATIONS[entry.key](max_bytes=max_bytes))
+    
+    return sources
 
 
 def summary() -> dict[str, Any]:
