@@ -1,0 +1,2646 @@
+{
+  "version": "2.0",
+  "generated": "2026-09-11T11:33:22.793367",
+  "total": 97,
+  "by_country": {
+    "GLOBAL": 97
+  },
+  "by_domain": {
+    "climate": 8,
+    "cyber": 10,
+    "energy": 8,
+    "geopolitical": 10,
+    "health": 8,
+    "infrastructure": 8,
+    "markets": 9,
+    "technology": 17,
+    "trade": 7,
+    "weather": 12
+  },
+  "by_quality": {
+    "excellent": 80,
+    "good": 1,
+    "very_good": 16
+  },
+  "sources": [
+    {
+      "id": "global-aemet-00000",
+      "name": "AEMET**",
+      "url": "https://www.aemet.es",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-aemetdataportal-00001",
+      "name": "AEMET Data Portal",
+      "url": "https://www.aemet.es/es/datosclim",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-openweathermap-00002",
+      "name": "OpenWeatherMap",
+      "url": "https://openweathermap.org",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 92.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-copernicuseu-00003",
+      "name": "Copernicus (EU)",
+      "url": "https://cds.climate.copernicus.eu",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-pluvia-00004",
+      "name": "PLUVIA",
+      "url": "https://www.aemet.es/es/serviciosclimaticos/pluvia",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 88.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-realinstitutoelcano-00005",
+      "name": "Real Instituto Elcano**",
+      "url": "https://www.realinstitutoelcano.org",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ministerioasuntosexteriores-00006",
+      "name": "Ministerio Asuntos Exteriores",
+      "url": "https://www.exteriores.gob.es",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 90.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-fundacincarolina-00007",
+      "name": "Fundación Carolina",
+      "url": "https://www.fundacioncarolina.org",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "weekly",
+        "coverage": "regional",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 82.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ieeeseguridaddefensa-00008",
+      "name": "IEEE Seguridad & Defensa",
+      "url": "https://www.ieee.es",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 3.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 75.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ministerioeducacinfp-00009",
+      "name": "Ministerio Educación & FP**",
+      "url": "https://www.educacionyfp.gob.es",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ineportaleducativo-00010",
+      "name": "INE Portal Educativo",
+      "url": "https://www.ine.es",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 94.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-aneca-00011",
+      "name": "ANECA",
+      "url": "https://www.aneca.es",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 86.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-opendeustoocw-00012",
+      "name": "OpenDeusto (OCW)",
+      "url": "https://www.opendeusto.es",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 3.0,
+        "update_freq": "weekly",
+        "coverage": "regional",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 76.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-incibe-00013",
+      "name": "INCIBE**",
+      "url": "https://www.incibe.es",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-incibealertas-00014",
+      "name": "INCIBE Alertas",
+      "url": "https://www.incibe.es/incibe-cert/alertas",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "rss",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "rss",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ccncert-00015",
+      "name": "CCNCERT",
+      "url": "https://www.ccn.cni.es",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 88.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-aepdbuscadorsanciones-00016",
+      "name": "AEPD Buscador Sanciones",
+      "url": "https://www.aepd.es/derechos-y-deberes/conocer-tus-derechos",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 87.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-bolsademadrid-00017",
+      "name": "Bolsa de Madrid**",
+      "url": "https://www.bolsademadrid.es",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cnmvportal-00018",
+      "name": "CNMV Portal",
+      "url": "https://www.cnmv.es",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-investingcomespaa-00019",
+      "name": "Investing.com España",
+      "url": "https://es.investing.com",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 90.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-mitecotransicinecolgica-00020",
+      "name": "MITECO (Transición Ecológica)**",
+      "url": "https://www.miteco.gob.es",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 95.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ineestadsticasambientales-00021",
+      "name": "INE Estadísticas Ambientales",
+      "url": "https://www.ine.es/prensa/epa.htm",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "quarterly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 92.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cesepeenerga-00022",
+      "name": "CESEPE (Energía)",
+      "url": "https://www.cesepe.es",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 84.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ontsisociedaddelainformacin-00023",
+      "name": "ONTSI (Sociedad de la Información)**",
+      "url": "https://www.ontsi.es",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "technology",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "quarterly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 87.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "technology"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-telefnicatechreports-00024",
+      "name": "Telefónica Tech Reports",
+      "url": "https://www.telefonica.es",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "technology",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "quarterly",
+        "coverage": "regional",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 82.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "technology"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-reddeinnovacinenciberseguridad-00025",
+      "name": "Red de Innovación en Ciberseguridad",
+      "url": "https://www.red-ics.es",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "technology",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 3.0,
+        "update_freq": "monthly",
+        "coverage": "regional",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 74.0,
+      "quality_tier": "good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "technology"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-reeredelctricaespaola-00026",
+      "name": "REE (Red Eléctrica Española)**",
+      "url": "https://www.ree.es",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-reeesiosdata-00027",
+      "name": "REE Esios Data",
+      "url": "https://www.esios.ree.es",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-omiemercadoelctrico-00028",
+      "name": "OMIE (Mercado Eléctrico)",
+      "url": "https://www.omie.es",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "regional",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-mscbsministeriosanidad-00029",
+      "name": "MSCBS (Ministerio Sanidad)**",
+      "url": "https://www.sanidad.gob.es",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-institutocarlosiii-00030",
+      "name": "Instituto Carlos III",
+      "url": "https://www.isciii.es",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 95.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-vigilanciadegripes-00031",
+      "name": "Vigilancia de Gripes",
+      "url": "https://www.isciii.es/isciii/covid-19/sistema-de-vigilancia-centinela",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "weekly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 93.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-aeatagenciatributaria-00032",
+      "name": "AEAT (Agencia Tributaria)**",
+      "url": "https://www.aeat.es",
+      "country": "GLOBAL",
+      "domain": "trade",
+      "topic": "trade",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "trade"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-datacomexcomercioexterior-00033",
+      "name": "Datacomex (Comercio Exterior)",
+      "url": "https://datacomex.comercio.es",
+      "country": "GLOBAL",
+      "domain": "trade",
+      "topic": "trade",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 89.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "trade"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-icexexportacin-00034",
+      "name": "ICEX (Exportación)",
+      "url": "https://www.icex.es",
+      "country": "GLOBAL",
+      "domain": "trade",
+      "topic": "trade",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "monthly",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 86.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "trade"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-copernicusimgenessatlite-00035",
+      "name": "Copernicus (Imágenes Satélite)**",
+      "url": "https://www.copernicus.eu",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-igninstitutogeogrficonacional-00036",
+      "name": "IGN (Instituto Geográfico Nacional)**",
+      "url": "https://www.ign.es",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 95.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-agencianacionaldefrecuencias-00037",
+      "name": "Agencia Nacional de Frecuencias",
+      "url": "https://www.afc.gob.es",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "quarterly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 84.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-mtofrance-00038",
+      "name": "Météo-France**",
+      "url": "https://www.meteo.fr",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-mtofranceapi-00039",
+      "name": "Météo-France API",
+      "url": "https://www.meteoblue.com",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 91.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ecmwf-00040",
+      "name": "ECMWF",
+      "url": "https://www.ecmwf.int",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ifri-00041",
+      "name": "IFRI**",
+      "url": "https://www.ifri.org",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-francediplomatie-00042",
+      "name": "France Diplomatie",
+      "url": "https://www.diplomatie.gouv.fr",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 91.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ministreducation-00043",
+      "name": "Ministère Éducation**",
+      "url": "https://www.education.gouv.fr",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-inseeestadsticas-00044",
+      "name": "INSEE (Estadísticas)",
+      "url": "https://www.insee.fr",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 95.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-anssi-00045",
+      "name": "ANSSI**",
+      "url": "https://www.ssi.gouv.fr",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-anssialertes-00046",
+      "name": "ANSSI Alertes",
+      "url": "https://www.anssi.gouv.fr/alertes",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "rss",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "rss",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-euronextparis-00047",
+      "name": "Euronext Paris**",
+      "url": "https://www.euronext.com/fr",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "regional",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-amf-00048",
+      "name": "AMF",
+      "url": "https://www.amf-france.org",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ministrecologie-00049",
+      "name": "Ministère Écologie**",
+      "url": "https://www.ecologie.gouv.fr",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 95.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ademeenerga-00050",
+      "name": "ADEME (Energía)",
+      "url": "https://www.ademe.fr",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 88.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-agencenumrique-00051",
+      "name": "Agence Numérique**",
+      "url": "https://www.agence-nationale-numerique.gouv.fr",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "technology",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "quarterly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 85.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "technology"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-rterseautransportlectricit-00052",
+      "name": "RTE (Réseau Transport Électricité)**",
+      "url": "https://www.rte-france.com",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-rteeco2mix-00053",
+      "name": "RTE eCO2mix",
+      "url": "https://www.rte-france.com/eco2mix",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ministresant-00054",
+      "name": "Ministère Santé**",
+      "url": "https://www.sante.gouv.fr",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-pasteurinstitute-00055",
+      "name": "Pasteur Institute",
+      "url": "https://www.pasteur.fr",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 94.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-frenchcustomsdouanes-00056",
+      "name": "French Customs (Douanes)**",
+      "url": "https://www.douanes.gouv.fr",
+      "country": "GLOBAL",
+      "domain": "trade",
+      "topic": "trade",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "trade"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cnesagenciaespacial-00057",
+      "name": "CNES (Agencia Espacial)**",
+      "url": "https://www.cnes.fr",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-sentinelhub-00058",
+      "name": "Sentinel Hub",
+      "url": "https://www.sentinel-hub.com",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 95.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-noaa-00059",
+      "name": "NOAA**",
+      "url": "https://www.noaa.gov",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nwsweathergov-00060",
+      "name": "NWS (Weather.gov)",
+      "url": "https://weather.gov",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-noaaapi-00061",
+      "name": "NOAA API",
+      "url": "https://www.weather.gov/documentation/services-web-api",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-openweathermap-00062",
+      "name": "OpenWeatherMap",
+      "url": "https://openweathermap.org",
+      "country": "GLOBAL",
+      "domain": "weather",
+      "topic": "weather",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 92.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "weather"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-councilonforeignrelations-00063",
+      "name": "Council on Foreign Relations**",
+      "url": "https://www.cfr.org",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-statedepartmentdiplomaticposts-00064",
+      "name": "State Department (Diplomatic Posts)",
+      "url": "https://www.state.gov",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-brookingsinstitution-00065",
+      "name": "Brookings Institution",
+      "url": "https://www.brookings.edu",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-csiscenterstrategicstudies-00066",
+      "name": "CSIS (Center Strategic Studies)",
+      "url": "https://www.csis.org",
+      "country": "GLOBAL",
+      "domain": "geopolitical",
+      "topic": "geopolitical",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geopolitical"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-usdepartmentofeducation-00067",
+      "name": "U.S. Department of Education**",
+      "url": "https://www.ed.gov",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nationalcenterforeducationstatisticsnces-00068",
+      "name": "National Center for Education Statistics (NCES)",
+      "url": "https://nces.ed.gov",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "quarterly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-mitopencourseware-00069",
+      "name": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-stanfordonline-00070",
+      "name": "Stanford Online",
+      "url": "https://online.stanford.edu",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "education",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "quarterly",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 95.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "education"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cisacybersecurityinfrastructuresecurity-00071",
+      "name": "CISA (Cybersecurity & Infrastructure Security)**",
+      "url": "https://www.cisa.gov",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cisaalertsadvisories-00072",
+      "name": "CISA Alerts & Advisories",
+      "url": "https://www.cisa.gov/news-events/alerts-advisories",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "rss",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "rss",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nsacybersecurity-00073",
+      "name": "NSA Cybersecurity",
+      "url": "https://www.nsa.gov/cybersecurity",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-fbicyberdivision-00074",
+      "name": "FBI Cyber Division",
+      "url": "https://www.fbi.gov/investigate/cyber",
+      "country": "GLOBAL",
+      "domain": "cyber",
+      "topic": "cybersecurity",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "cybersecurity"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-secsecuritiesexchangecommission-00075",
+      "name": "SEC (Securities & Exchange Commission)**",
+      "url": "https://www.sec.gov",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-secedgardatabase-00076",
+      "name": "SEC EDGAR Database",
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nyse-00077",
+      "name": "NYSE",
+      "url": "https://www.nyse.com",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nasdaq-00078",
+      "name": "NASDAQ",
+      "url": "https://www.nasdaq.com",
+      "country": "GLOBAL",
+      "domain": "markets",
+      "topic": "markets",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "markets"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-epaenvironmentalprotection-00079",
+      "name": "EPA (Environmental Protection)**",
+      "url": "https://www.epa.gov",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-noaaclimategov-00080",
+      "name": "NOAA Climate.gov",
+      "url": "https://www.climate.gov",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-usgeologicalsurvey-00081",
+      "name": "U.S. Geological Survey",
+      "url": "https://www.usgs.gov",
+      "country": "GLOBAL",
+      "domain": "climate",
+      "topic": "sustainability",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "sustainability"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nistaiframework-00082",
+      "name": "NIST AI Framework**",
+      "url": "https://www.nist.gov/ai",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "technology",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "quarterly",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 96.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "technology"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-ieeespectrum-00083",
+      "name": "IEEE Spectrum",
+      "url": "https://spectrum.ieee.org",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "technology",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 90.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "technology"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-gartnerresearch-00084",
+      "name": "Gartner Research",
+      "url": "https://www.gartner.com (freemium)",
+      "country": "GLOBAL",
+      "domain": "technology",
+      "topic": "technology",
+      "access_type": "registered",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 85.0,
+      "quality_tier": "very_good",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "technology"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-eiaenergyinformationadministration-00085",
+      "name": "EIA (Energy Information Administration)**",
+      "url": "https://www.eia.gov",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nercreliabilitycouncil-00086",
+      "name": "NERC (Reliability Council)",
+      "url": "https://www.nerc.net",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "regional",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-usenergyinformationapi-00087",
+      "name": "U.S. Energy Information API",
+      "url": "https://www.eia.gov/opendata",
+      "country": "GLOBAL",
+      "domain": "energy",
+      "topic": "energy",
+      "access_type": "api",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "json",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "energy"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cdccentersfordiseasecontrol-00088",
+      "name": "CDC (Centers for Disease Control)**",
+      "url": "https://www.cdc.gov",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cdccovid19tracker-00089",
+      "name": "CDC COVID-19 Tracker",
+      "url": "https://covid.cdc.gov",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "dashboard",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nihnationalinstitutesofhealth-00090",
+      "name": "NIH (National Institutes of Health)",
+      "url": "https://www.nih.gov",
+      "country": "GLOBAL",
+      "domain": "health",
+      "topic": "health",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "daily",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "health"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-uscensusbureau-00091",
+      "name": "U.S. Census Bureau**",
+      "url": "https://www.census.gov",
+      "country": "GLOBAL",
+      "domain": "trade",
+      "topic": "trade",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "monthly",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "trade"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-usatradeonline-00092",
+      "name": "USA Trade Online",
+      "url": "https://usatrade.census.gov",
+      "country": "GLOBAL",
+      "domain": "trade",
+      "topic": "trade",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "monthly",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 97.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "trade"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-cbpcustomsborderprotection-00093",
+      "name": "CBP (Customs & Border Protection)",
+      "url": "https://www.cbp.gov",
+      "country": "GLOBAL",
+      "domain": "trade",
+      "topic": "trade",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 4.0,
+        "update_freq": "daily",
+        "coverage": "national",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 91.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "trade"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-nasaearthdata-00094",
+      "name": "NASA Earthdata**",
+      "url": "https://earthdata.nasa.gov",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-usgsearthexplorer-00095",
+      "name": "USGS EarthExplorer",
+      "url": "https://earthexplorer.usgs.gov",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "web",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 1.0,
+        "years_active": 10
+      },
+      "composite_score": 98.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    },
+    {
+      "id": "global-landsat89-00096",
+      "name": "Landsat 8/9",
+      "url": "https://www.usgs.gov/landsat",
+      "country": "GLOBAL",
+      "domain": "infrastructure",
+      "topic": "geospatial",
+      "access_type": "data_portal",
+      "metrics": {
+        "reliability": 5.0,
+        "update_freq": "realtime",
+        "coverage": "global",
+        "completeness": 1.0,
+        "accessibility": 0.8,
+        "years_active": 10
+      },
+      "composite_score": 99.0,
+      "quality_tier": "excellent",
+      "is_active": true,
+      "parser_type": "html",
+      "tags": [
+        "global-sources-v2",
+        "global",
+        "geospatial"
+      ],
+      "source_profile": "balanced"
+    }
+  ]
+}

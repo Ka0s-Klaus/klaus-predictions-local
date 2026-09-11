@@ -9,6 +9,7 @@ secrets.yaml
 
 # --- Datos y modelos locales ---
 data/
+!data/sources-*.json
 datasets/
 models/
 # Base de datos de desarrollo: SQLite es el motor por defecto.
