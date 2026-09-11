@@ -43,10 +43,16 @@ class CatalogEntry:
     description: str = ""
     notes: str = ""
     requires_key: bool = False
+    metadata: dict[str, Any] | None = None
 
     @property
     def is_implemented(self) -> bool:
         return self.status == IMPLEMENTED
+
+    @property
+    def is_global_source(self) -> bool:
+        """Detecta si es una fuente global (usa GenericWebSource)."""
+        return self.key.startswith("global_")
 
 
 def _parse(raw: dict[str, Any]) -> list[CatalogEntry]:
@@ -77,6 +83,7 @@ def _parse(raw: dict[str, Any]) -> list[CatalogEntry]:
                 description=item.get("description") or "",
                 notes=(item.get("notes") or "").strip(),
                 requires_key=bool(item.get("requires_key")),
+                metadata=item.get("metadata") or None,
             )
         )
     return entries
@@ -94,13 +101,22 @@ def load_catalog(path: str | None = None) -> tuple[CatalogEntry, ...]:
 
     # Una entrada marcada como implementada sin clase detrás sería una promesa
     # incumplida que solo se descubriría al arrancar la ingesta.
-    faltantes = [e.key for e in entries if e.is_implemented and e.key not in IMPLEMENTATIONS]
+    # EXCEPTO: las fuentes globales (clave comienza con "global_") usan GenericWebSource
+    # de forma parametrizada, así que no necesitan una clase específica en IMPLEMENTATIONS.
+    faltantes = [
+        e.key for e in entries
+        if e.is_implemented and e.key not in IMPLEMENTATIONS and not e.is_global_source
+    ]
     if faltantes:
         raise CatalogError(
             f"declaradas como implementadas pero sin clase en sources/: {', '.join(faltantes)}"
         )
 
-    huerfanas = {k for k in IMPLEMENTATIONS if k not in {e.key for e in entries}}
+    # Verifica que no haya clases huérfanas (salvo las globales que se generan dinámicamente)
+    huerfanas = {
+        k for k in IMPLEMENTATIONS
+        if k not in {e.key for e in entries} and not k.startswith("global_")
+    }
     if huerfanas:
         raise CatalogError(
             f"clases registradas que no aparecen en el catálogo: {', '.join(sorted(huerfanas))}"
@@ -143,7 +159,7 @@ def build_sources(
     sources = []
     for entry in selected:
         # Fuentes globales usan GenericWebSource parametrizado
-        if entry.key.startswith("global_"):
+        if entry.is_global_source:
             metadata = entry.metadata or {}
             source = GenericWebSource(
                 source_id=metadata.get("source_id", entry.key),
@@ -160,7 +176,7 @@ def build_sources(
         # Fuentes Klaus originales
         else:
             sources.append(IMPLEMENTATIONS[entry.key](max_bytes=max_bytes))
-    
+
     return sources
 
 
