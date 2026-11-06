@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/referencia, infra/hardware]
+---
+
 # Hardware y rendimiento real
 
 El objetivo declarado del proyecto es un **Lenovo ThinkPad L470** con 16 GB de RAM

@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/guia, infra/despliegue]
+---
+
 # Guía de Despliegue — Klaus Predictions en Red Local
 
 ## Arquitectura

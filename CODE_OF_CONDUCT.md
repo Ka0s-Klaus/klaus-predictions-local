@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/referencia, prediccion/fuentes]
+---
+
 # Código de Conducta del Pacto de Colaboradores
 
 ## Nuestro compromiso
