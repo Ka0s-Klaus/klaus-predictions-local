@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/guia, prediccion/fuentes]
+---
+
 # 📚 Guía de Estilo de Documentación
 
 Este documento define el estándar de formato para toda la documentación del proyecto **Klaus-predictions-local** a partir de septiembre 2026.

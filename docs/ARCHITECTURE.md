@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/referencia]
+---
+
 # Arquitectura
 
 ## El recorrido de una predicción

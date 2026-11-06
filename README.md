@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/referencia, prediccion/fuentes]
+---
+
 # 🔮 Pythia · klaus-predictions-local
 
 > **Oráculo de predicción que se ejecuta entero en tu máquina.** Feeds públicos, modelo local y enjambre de agentes cuyo voto se pondera por su historial de acierto. Sin nube, sin claves de API, sin coste por consulta.
@@ -5,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI](https://github.com/Ka0s-Klaus/klaus-predictions-local/actions/workflows/ci.yml/badge.svg)](https://github.com/Ka0s-Klaus/klaus-predictions-local/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]([[CONTRIBUTING|CONTRIBUTING.md]])
 
 ---
 

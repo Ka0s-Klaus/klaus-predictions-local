@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/guia, prediccion/fuentes]
+---
+
 # Guía de contribución
 
 Gracias por dedicar tiempo a este proyecto. Estas son las reglas del juego.

@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/referencia, prediccion/fuentes]
+---
+
 # 🌐 Integración de Fuentes Globales v2.0
 
 Integración completa de **2,847 fuentes públicas de información** de 195+ países en 12 temas especializados, con perfil **CRITICAL** optimizado para predicción de alertas.

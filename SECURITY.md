@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/referencia, prediccion/fuentes]
+---
+
 # Política de seguridad
 
 ## Versiones soportadas

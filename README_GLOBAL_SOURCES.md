@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/referencia, prediccion/fuentes]
+---
+
 # 🌐 Global Sources v2.0 - Resumen Rápido
 
 **Integración de 2,847 fuentes públicas de 195+ países en Klaus Predictions**

@@ -1,3 +1,7 @@
+---
+tags: [proyecto/klaus-predictions-local, tipo/release, prediccion/fuentes]
+---
+
 # Changelog
 
 Todos los cambios notables de este proyecto se documentan en este fichero.
